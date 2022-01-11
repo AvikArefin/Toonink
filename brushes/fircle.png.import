@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/fircle.png-ba2fbe11596abe442a7a1903398988f9.image"
+
+[deps]
+
+source_file="res://brushes/fircle.png"
+dest_files=[ "res://.import/fircle.png-ba2fbe11596abe442a7a1903398988f9.image" ]
+
+[params]
+

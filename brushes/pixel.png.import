@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/pixel.png-c633bc217cfc8b96ee191408538ce52b.image"
+
+[deps]
+
+source_file="res://brushes/pixel.png"
+dest_files=[ "res://.import/pixel.png-c633bc217cfc8b96ee191408538ce52b.image" ]
+
+[params]
+

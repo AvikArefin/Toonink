@@ -1,0 +1,249 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://Themes/UI_theme.tres" type="Theme" id=1]
+[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Screen.gd" type="Script" id=3]
+[ext_resource path="res://Scenes/ProjectLoader.gd" type="Script" id=4]
+[ext_resource path="res://Scenes/ColorDroper2.gd" type="Script" id=6]
+[ext_resource path="res://Scenes/Brushes.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Layers.gd" type="Script" id=9]
+
+[node name="Main" type="Node"]
+
+[node name="System" type="Control" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ViewContainer" type="ViewportContainer" parent="System"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 16.0
+margin_top = 24.0
+margin_right = -18.0
+margin_bottom = -25.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Viewport" type="Viewport" parent="System/ViewContainer"]
+size = Vector2( 1024, 600 )
+transparent_bg = true
+handle_input_locally = false
+render_target_update_mode = 3
+
+[node name="Screen" type="Node2D" parent="System/ViewContainer/Viewport"]
+position = Vector2( 0, 21 )
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": "Basically it's the blit_rect() and the blend_rect() functions provided by the godot image class for overwrite mode enabled and disabled respectively "
+}
+
+[node name="UI" parent="." instance=ExtResource( 2 )]
+
+[node name="Bottom" parent="UI" index="1"]
+margin_top = -41.0
+margin_bottom = -1.0
+
+[node name="Load" type="Button" parent="UI/Bottom" index="0"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -32.0
+margin_right = 64.0
+margin_bottom = -8.0
+theme = ExtResource( 1 )
+text = "LOAD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="UI/Bottom" index="1"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 72.0
+margin_top = -32.0
+margin_right = 128.0
+margin_bottom = -8.0
+text = "SAVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Clear" type="Button" parent="UI/Bottom" index="2"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 136.0
+margin_top = -32.0
+margin_right = 192.0
+margin_bottom = -8.0
+text = "CLEAR"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom" index="3"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 200.0
+margin_top = -32.0
+margin_right = 256.0
+margin_bottom = -8.0
+flat = true
+color = Color( 1, 0, 0, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorDroper2" type="ColorPickerButton" parent="UI/Bottom" index="4"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 264.0
+margin_top = -32.0
+margin_right = 320.0
+margin_bottom = -8.0
+flat = true
+color = Color( 0.945098, 1, 0, 1 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Mode" type="SpinBox" parent="UI/Bottom" index="5"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 328.0
+margin_top = -32.0
+margin_right = 416.0
+margin_bottom = -8.0
+min_value = 1.0
+max_value = 4.0
+value = 1.0
+align = 1
+prefix = "Mode:"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="size" type="SpinBox" parent="UI/Bottom" index="6"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 440.0
+margin_top = -32.0
+margin_right = 536.0
+margin_bottom = -8.0
+min_value = 1.0
+max_value = 50.0
+value = 16.0
+align = 1
+prefix = "Size:"
+suffix = "px"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProjectLoader" type="FileDialog" parent="UI"]
+margin_right = 315.0
+margin_bottom = 130.0
+popup_exclusive = true
+window_title = "Open a File"
+mode = 0
+access = 2
+filters = PoolStringArray( "*.png", "*.jpg" )
+current_dir = "/mnt/Data/Projects/Godot"
+current_path = "/mnt/Data/Projects/Godot/"
+script = ExtResource( 4 )
+
+[node name="Brushes" type="ItemList" parent="UI"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 56.0
+margin_bottom = 320.0
+rect_clip_content = false
+theme = ExtResource( 1 )
+max_text_lines = 2
+max_columns = 2
+same_column_width = true
+icon_mode = 0
+script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Layers" type="ItemList" parent="UI"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -273.0
+margin_right = 248.0
+margin_bottom = -49.0
+script = ExtResource( 9 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Add" type="Button" parent="UI/Layers"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -56.0
+margin_right = 112.0
+margin_bottom = -32.0
+focus_mode = 0
+theme = ExtResource( 1 )
+text = "+ ADD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Remove" type="Button" parent="UI/Layers"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -112.0
+margin_top = -56.0
+margin_right = -8.0
+margin_bottom = -32.0
+theme = ExtResource( 1 )
+text = "X REMOVE"
+
+[node name="LineEdit" type="LineEdit" parent="UI/Layers"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -88.0
+margin_right = 232.0
+margin_bottom = -64.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="UI/Layers"]
+margin_top = 200.0
+margin_right = 240.0
+margin_bottom = 214.0
+text = "No layer selected"
+align = 1
+
+[connection signal="pressed" from="UI/Bottom/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
+[connection signal="pressed" from="UI/Bottom/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
+[connection signal="pressed" from="UI/Bottom/Clear" to="System/ViewContainer/Viewport/Screen" method="create_new_image"]
+[connection signal="color_changed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
+[connection signal="popup_closed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="pressed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="color_changed" from="UI/Bottom/ColorDroper2" to="UI/Bottom/ColorDroper2" method="_on_ColorDroper2_color_changed"]
+[connection signal="value_changed" from="UI/Bottom/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
+[connection signal="value_changed" from="UI/Bottom/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
+[connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
+[connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
+[connection signal="popup_hide" from="UI/ProjectLoader" to="UI/ProjectLoader" method="cross_allowed"]
+[connection signal="item_selected" from="UI/Brushes" to="System/ViewContainer/Viewport/Screen" method="change_brush"]
+[connection signal="item_selected" from="UI/Layers" to="UI/Layers" method="_on_Layers_item_selected"]
+[connection signal="pressed" from="UI/Layers/Add" to="UI/Layers" method="_on_Add_pressed"]
+[connection signal="pressed" from="UI/Layers/Remove" to="UI/Layers" method="_on_Remove_pressed"]
+[connection signal="text_entered" from="UI/Layers/LineEdit" to="UI/Layers" method="_on_LineEdit_text_entered"]
+
+[editable path="UI"]
