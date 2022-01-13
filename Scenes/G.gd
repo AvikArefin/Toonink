@@ -1,5 +1,8 @@
 extends Node
 
+onready var window_size_x : int = OS.get_window_safe_area().size.x
+onready var window_size_y : int = OS.get_window_safe_area().size.y
+
 var zoom_lv : String = '100'
 var zoom_able : bool # Useless for the moment
 

@@ -1,8 +1,5 @@
 extends Node2D
 
-onready var window_size_x : int = OS.get_window_safe_area().size.x
-onready var window_size_y : int = OS.get_window_safe_area().size.y
-
 onready var screen_rect : Rect2 = get_viewport_rect()
 var is_allowed : bool = true
 
@@ -48,7 +45,7 @@ func _ready() -> void:
 
 func create_new_image():
 	var img := Image.new()
-	img.create(window_size_x, window_size_y, false, Image.FORMAT_RGBA8)
+	img.create(G.window_size_x, G.window_size_y, false, Image.FORMAT_RGBA8)
 	img_storage = img
 	img_storage.lock()
 	update()
@@ -119,6 +116,10 @@ func color_dropper_toggle_is_allowed() -> void:
 #		change the brush color now..
 		G.blit_brush.fill(G.cross_color)
 
+
+
+
+
 func _on_size_value_changed(value: float) -> void:
 	G.size = int(value)
 	
@@ -127,4 +128,4 @@ func _on_size_value_changed(value: float) -> void:
 
 func change_color(color: Color) -> void:
 	G.cross_color = color
-	
+

@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Toonink"
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://76.png"
+config/icon="res://2export/76.png"
 
 [autoload]
 

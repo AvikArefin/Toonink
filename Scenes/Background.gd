@@ -16,10 +16,12 @@ var _graph_no : int = 2
 
 func _ready() -> void:
 	line()
-	pass
 
-# Do some code cleanup..
+func change_line_color(color: Color) -> void:
+	line_color = color
+
 func change_background(index: int) -> void:
+	multi_dots = []
 	match index:
 		0:
 			line()
@@ -31,12 +33,11 @@ func change_background(index: int) -> void:
 			slanted()
 		4:
 			dotted()
-
+	
 
 func line() -> void:
-#	var step : float = (finish - start)/lines as float
-	for y in range(start, finish, step):
-		for x in range(0, 501, 500):
+	for y in range(0, G.window_size_y, step):
+		for x in [0, G.window_size_x]:
 			multi_dots.append(Vector2(x, y))
 #	print(multi_dots)
 	_graph_no = 1
@@ -44,34 +45,32 @@ func line() -> void:
 
 
 func grid() -> void:
-#	var step : float = (finish - start)/lines as float
-	for y in range(start, finish, step):
-		for x in range(0, 501, 500):
+	for y in range(0, G.window_size_y, step):
+		for x in [0, G.window_size_x]:
 			multi_dots.append(Vector2(x, y))
 			
-	for x in range(start, finish, step):
-		for y in range(0, 501, 500):
+	for x in range(0, G.window_size_x, step):
+		for y in [0, G.window_size_y]:
 			multi_dots.append(Vector2(x, y))
 #	print(multi_dots)
-	_graph_no = 1	
+	_graph_no = 1
 	update()
 
 
 func box() -> void:
-	for x in range(1, 500, 50):
-		for y in range(1, 500, 50):
+	for x in range(0, G.window_size_x, 50):
+		for y in range(0, G.window_size_y, 50):
 			multi_dots.append(Vector2(y, x))
-	for x in range(1, 500, 50):
-		for y in range(1, 500, 50):
+	for x in range(0, G.window_size_x, 50):
+		for y in range(0, G.window_size_y, 50):
 			multi_dots.append((Vector2(x, y)))
-	_graph_no = 1	
+	_graph_no = 1
 	update()
 
 
 func slanted() -> void:
-#	var step : float = (finish - start)/lines as float
-	for y in range(start, finish, step):
-		for x in range(start, finish, step):
+	for y in range(0, G.window_size_x, step):
+		for x in range(0, G.window_size_y, step):
 			multi_dots.append(Vector2(x, y))
 			multi_dots.append(Vector2(y, x))
 	_graph_no = 1
@@ -79,8 +78,8 @@ func slanted() -> void:
 
 
 func dotted() -> void:
-	for x in range(start, finish, step):
-		for y in range(start, finish, step):
+	for x in range(0, G.window_size_x, step):
+		for y in range(0, G.window_size_y, step):
 			multi_dots.append(Vector2(x, y))
 	_graph_no = 2
 	update()
@@ -102,3 +101,6 @@ func _draw() -> void:
 			draw_texture(background, Vector2.ZERO)
 
 # Ability to customize the values of the properties....
+
+
+

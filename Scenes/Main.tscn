@@ -13,9 +13,6 @@ flags = 4
 load_path = "res://.import/Add.png-dd1974b1d681ab394730e6dd6fa07fe7.stex"
 
 [node name="Main" type="Node"]
-__meta__ = {
-"_edit_horizontal_guides_": [ 112.0 ]
-}
 
 [node name="System" type="Control" parent="."]
 anchor_right = 1.0
@@ -27,10 +24,10 @@ __meta__ = {
 [node name="ViewContainer" type="ViewportContainer" parent="System"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 16.0
+margin_left = 168.0
 margin_top = 24.0
-margin_right = -18.0
-margin_bottom = -25.0
+margin_right = -2.0
+margin_bottom = -41.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -115,9 +112,9 @@ __meta__ = {
 [node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 200.0
+margin_left = 400.0
 margin_top = -32.0
-margin_right = 232.0
+margin_right = 432.0
 margin_bottom = -8.0
 flat = true
 color = Color( 1, 0, 0, 1 )
@@ -128,9 +125,9 @@ __meta__ = {
 [node name="Mode" type="OptionButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 240.0
+margin_left = 200.0
 margin_top = -32.0
-margin_right = 328.0
+margin_right = 288.0
 margin_bottom = -8.0
 hint_tooltip = "Cross mode"
 text = "Blend"
@@ -141,9 +138,9 @@ selected = 0
 [node name="size" type="SpinBox" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 336.0
+margin_left = 296.0
 margin_top = -32.0
-margin_right = 432.0
+margin_right = 392.0
 margin_bottom = -8.0
 min_value = 1.0
 max_value = 50.0
@@ -158,9 +155,9 @@ __meta__ = {
 [node name="Background" type="OptionButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 448.0
+margin_left = 440.0
 margin_top = -32.0
-margin_right = 520.0
+margin_right = 512.0
 margin_bottom = -8.0
 hint_tooltip = "Background"
 text = "Line"
@@ -168,6 +165,21 @@ items = [ "Line", null, false, 0, null, "Grid", null, false, 1, null, "Box", nul
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
+}
+
+[node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 520.0
+margin_top = -32.0
+margin_right = 552.0
+margin_bottom = -8.0
+flat = true
+__meta__ = {
+"_editor_description_": "For some reason this node also works when the signal is feed to
+\"color_dropper_toggle_is_allowed()\"
+function in the 
+$Screen ---- node"
 }
 
 [node name="ProjectLoader" type="FileDialog" parent="UI"]
@@ -183,9 +195,9 @@ current_path = "/mnt/Data/Projects/Godot/"
 script = ExtResource( 4 )
 
 [node name="TextureLoader" type="ItemList" parent="UI"]
-margin_left = 88.0
+margin_left = 96.0
 margin_top = 32.0
-margin_right = 152.0
+margin_right = 160.0
 margin_bottom = 368.0
 rect_clip_content = false
 max_text_lines = 3
@@ -281,6 +293,9 @@ stretch_mode = 3
 [connection signal="item_selected" from="UI/Bottom/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
 [connection signal="value_changed" from="UI/Bottom/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
 [connection signal="item_selected" from="UI/Bottom/Background" to="System/ViewContainer/Viewport/Background" method="change_background"]
+[connection signal="color_changed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Background" method="change_line_color"]
+[connection signal="popup_closed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="pressed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
 [connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
 [connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
 [connection signal="popup_hide" from="UI/ProjectLoader" to="UI/ProjectLoader" method="cross_allowed"]
