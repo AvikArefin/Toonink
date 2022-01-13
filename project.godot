@@ -40,7 +40,7 @@ _global_script_class_icons={
 
 config/name="Toonink"
 run/main_scene="res://Scenes/Main.tscn"
-config/icon="res://icon.png"
+config/icon="res://76.png"
 
 [autoload]
 
@@ -50,6 +50,11 @@ G="*res://Scenes/G.gd"
 
 window/size/width=1322
 window/size/height=753
+window/size/always_on_top=true
+
+[gui]
+
+theme/custom="res://Themes/UI_theme.tres"
 
 [input]
 

@@ -26,8 +26,6 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 		Screen.img_storage.lock()
 		Screen.update()
 		
-#		Screen.is_allowed = true
-		
 		G.stored_img_x = str(Screen.img_storage.get_size().x)
 		G.stored_img_y = str(Screen.img_storage.get_size().y)
 
@@ -35,8 +33,6 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 func save_confirmed() -> void:
 	if mode == MODE_SAVE_FILE:
 		Screen.img_storage.save_png(current_path)
-#		Screen.is_allowed = true
-
 
 func cross_allowed() -> void:
 	Screen.is_allowed = true

@@ -1,21 +1,22 @@
 extends ItemList
 
-const brushes_dir := 'res://brushes/'
+const brushes_dir := 'res://Assets/brushes/'
 
 func _ready() -> void:
 	load_brushes()
-#	could cause problem...
-	G.brush = G.brush_list[0]
+	
+	G.brush = G.brush_list[0] #	could cause problem...
 	G.brush_rect = G.brush.get_used_rect()
 	
 	G.blit_brush.copy_from(G.brush_list[0])
 	G.blit_brush.fill(Color(G.cross_color))
+	G.reinitialize()
 
 
 func load_brushes() -> void:
 	var dir := Directory.new()
 	if dir.open(brushes_dir) == OK:
-		var _err = dir.list_dir_begin(true, false) # skips folders, doesn't skip hidden
+		var _err = dir.list_dir_begin(true, true) # skips folders, skipes hidden files
 		var file_name : String = dir.get_next()
 		while file_name != "":
 			if !file_name.ends_with('.import'):
@@ -24,7 +25,6 @@ func load_brushes() -> void:
 			file_name = dir.get_next()
 		dir.list_dir_end()
 
-		
 	else:
 		print("An error occurred when trying to access the brushes texture folder.")
 
@@ -39,14 +39,4 @@ func _loader(_name_of_brush: String):
 	_img.convert(Image.FORMAT_RGBA8)
 	G.brush_list.append(_img)
 	
-#func choose_brush(index: int) -> void:
-#	G.brush = G.brush_list[index]
-#	G.brush_rect = G.brush.get_used_rect()
-#
-#	G.eraser.create(G.brush.get_size().x, G.brush.get_size().y, false, Image.FORMAT_RGBA8)
-#	G.blit_brush.create(G.brush.get_size().x, G.brush.get_size().y, false, Image.FORMAT_RGBA8)
-#	G.blit_brush.fill(G.cross_color)
-#
 
-	
-	

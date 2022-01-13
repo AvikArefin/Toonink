@@ -1,6 +1,6 @@
-[gd_resource type="Theme" load_steps=10 format=2]
+[gd_resource type="Theme" load_steps=9 format=2]
 
-[ext_resource path="res://Themes/UI_flatbox_back.tres" type="StyleBox" id=1]
+[ext_resource path="res://Themes/flatbox_back.tres" type="StyleBox" id=1]
 
 [sub_resource type="StyleBoxEmpty" id=5]
 
@@ -21,12 +21,10 @@ corner_radius_bottom_right = 20
 corner_radius_bottom_left = 20
 
 [sub_resource type="StyleBoxFlat" id=9]
+bg_color = Color( 0, 0, 0, 1 )
 
 [sub_resource type="StyleBoxFlat" id=10]
 bg_color = Color( 0.0666667, 0.886275, 0.25098, 1 )
-
-[sub_resource type="StyleBoxFlat" id=11]
-bg_color = Color( 0.741176, 0.152941, 0.152941, 1 )
 
 [sub_resource type="StyleBoxFlat" id=12]
 bg_color = Color( 0.443137, 0.0705882, 0.721569, 1 )
@@ -44,7 +42,7 @@ ItemList/styles/bg = ExtResource( 1 )
 ItemList/styles/bg_focus = ExtResource( 1 )
 ItemList/styles/cursor = SubResource( 9 )
 ItemList/styles/cursor_unfocused = SubResource( 10 )
-ItemList/styles/selected = SubResource( 11 )
+ItemList/styles/selected = SubResource( 12 )
 ItemList/styles/selected_focus = SubResource( 12 )
 Label/styles/normal = ExtResource( 1 )
 Panel/styles/panel = ExtResource( 1 )

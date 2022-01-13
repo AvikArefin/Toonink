@@ -1,14 +1,21 @@
-[gd_scene load_steps=8 format=2]
+[gd_scene load_steps=9 format=2]
 
-[ext_resource path="res://Themes/UI_theme.tres" type="Theme" id=1]
-[ext_resource path="res://Scenes/UI.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Top.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/TextureLoader.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Screen.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/ProjectLoader.gd" type="Script" id=4]
-[ext_resource path="res://Scenes/ColorDroper2.gd" type="Script" id=6]
-[ext_resource path="res://Scenes/Brushes.gd" type="Script" id=7]
+[ext_resource path="res://Scenes/Plus.gd" type="Script" id=5]
+[ext_resource path="res://Scenes/Background.gd" type="Script" id=6]
 [ext_resource path="res://Scenes/Layers.gd" type="Script" id=9]
 
+[sub_resource type="StreamTexture" id=1]
+flags = 4
+load_path = "res://.import/Add.png-dd1974b1d681ab394730e6dd6fa07fe7.stex"
+
 [node name="Main" type="Node"]
+__meta__ = {
+"_edit_horizontal_guides_": [ 112.0 ]
+}
 
 [node name="System" type="Control" parent="."]
 anchor_right = 1.0
@@ -34,33 +41,54 @@ transparent_bg = true
 handle_input_locally = false
 render_target_update_mode = 3
 
+[node name="Background" type="Node2D" parent="System/ViewContainer/Viewport"]
+position = Vector2( 0, 21 )
+script = ExtResource( 6 )
+__meta__ = {
+"_editor_description_": ""
+}
+
 [node name="Screen" type="Node2D" parent="System/ViewContainer/Viewport"]
 position = Vector2( 0, 21 )
 script = ExtResource( 3 )
 __meta__ = {
-"_editor_description_": "Basically it's the blit_rect() and the blend_rect() functions provided by the godot image class for overwrite mode enabled and disabled respectively "
+"_editor_description_": ""
 }
 
-[node name="UI" parent="." instance=ExtResource( 2 )]
+[node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Bottom" parent="UI" index="1"]
+[node name="Top" type="Label" parent="UI"]
+anchor_right = 1.0
+margin_bottom = 24.0
+align = 1
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bottom" type="Panel" parent="UI"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 margin_top = -41.0
 margin_bottom = -1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
-[node name="Load" type="Button" parent="UI/Bottom" index="0"]
+[node name="Load" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 8.0
 margin_top = -32.0
 margin_right = 64.0
 margin_bottom = -8.0
-theme = ExtResource( 1 )
 text = "LOAD"
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Save" type="Button" parent="UI/Bottom" index="1"]
+[node name="Save" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 72.0
@@ -72,7 +100,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Clear" type="Button" parent="UI/Bottom" index="2"]
+[node name="Clear" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 136.0
@@ -84,12 +112,12 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom" index="3"]
+[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 200.0
 margin_top = -32.0
-margin_right = 256.0
+margin_right = 232.0
 margin_bottom = -8.0
 flat = true
 color = Color( 1, 0, 0, 1 )
@@ -97,49 +125,47 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorDroper2" type="ColorPickerButton" parent="UI/Bottom" index="4"]
+[node name="Mode" type="OptionButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 264.0
+margin_left = 240.0
 margin_top = -32.0
-margin_right = 320.0
+margin_right = 328.0
 margin_bottom = -8.0
-flat = true
-color = Color( 0.945098, 1, 0, 1 )
-script = ExtResource( 6 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Mode" type="SpinBox" parent="UI/Bottom" index="5"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 328.0
-margin_top = -32.0
-margin_right = 416.0
-margin_bottom = -8.0
-min_value = 1.0
-max_value = 4.0
-value = 1.0
+hint_tooltip = "Cross mode"
+text = "Blend"
 align = 1
-prefix = "Mode:"
-__meta__ = {
-"_edit_use_anchors_": false
-}
+items = [ "Blend", null, false, 0, null, "Eraser", null, false, 1, null, "Pen", null, false, 2, null, "Blit", null, false, 3, null ]
+selected = 0
 
-[node name="size" type="SpinBox" parent="UI/Bottom" index="6"]
+[node name="size" type="SpinBox" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 440.0
+margin_left = 336.0
 margin_top = -32.0
-margin_right = 536.0
+margin_right = 432.0
 margin_bottom = -8.0
 min_value = 1.0
 max_value = 50.0
-value = 16.0
+value = 9.0
 align = 1
 prefix = "Size:"
 suffix = "px"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Background" type="OptionButton" parent="UI/Bottom"]
+anchor_top = 1.0
+anchor_bottom = 1.0
+margin_left = 448.0
+margin_top = -32.0
+margin_right = 520.0
+margin_bottom = -8.0
+hint_tooltip = "Background"
+text = "Line"
+items = [ "Line", null, false, 0, null, "Grid", null, false, 1, null, "Box", null, false, 2, null, "Slanted", null, false, 3, null, "Dotted", null, false, 4, null, "Picture", null, false, 5, null ]
+selected = 0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -156,29 +182,32 @@ current_dir = "/mnt/Data/Projects/Godot"
 current_path = "/mnt/Data/Projects/Godot/"
 script = ExtResource( 4 )
 
-[node name="Brushes" type="ItemList" parent="UI"]
-margin_left = 8.0
+[node name="TextureLoader" type="ItemList" parent="UI"]
+margin_left = 88.0
 margin_top = 32.0
-margin_right = 56.0
-margin_bottom = 320.0
+margin_right = 152.0
+margin_bottom = 368.0
 rect_clip_content = false
-theme = ExtResource( 1 )
-max_text_lines = 2
+max_text_lines = 3
+auto_height = true
 max_columns = 2
 same_column_width = true
 icon_mode = 0
-script = ExtResource( 7 )
+script = ExtResource( 2 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Layers" type="ItemList" parent="UI"]
+anchor_left = 1.0
 anchor_top = 1.0
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = -250.0
 margin_top = -273.0
-margin_right = 248.0
+margin_right = -10.0
 margin_bottom = -49.0
+auto_height = true
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -192,7 +221,6 @@ margin_top = -56.0
 margin_right = 112.0
 margin_bottom = -32.0
 focus_mode = 0
-theme = ExtResource( 1 )
 text = "+ ADD"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -207,7 +235,6 @@ margin_left = -112.0
 margin_top = -56.0
 margin_right = -8.0
 margin_bottom = -32.0
-theme = ExtResource( 1 )
 text = "X REMOVE"
 
 [node name="LineEdit" type="LineEdit" parent="UI/Layers"]
@@ -228,22 +255,38 @@ margin_bottom = 214.0
 text = "No layer selected"
 align = 1
 
+[node name="CrossList" type="VBoxContainer" parent="UI"]
+margin_left = 8.0
+margin_top = 32.0
+margin_right = 72.0
+margin_bottom = 440.0
+script = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Plus" type="TextureButton" parent="UI/CrossList"]
+margin_right = 64.0
+margin_bottom = 64.0
+hint_tooltip = "Add Profile"
+texture_normal = SubResource( 1 )
+stretch_mode = 3
+
 [connection signal="pressed" from="UI/Bottom/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Bottom/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
 [connection signal="pressed" from="UI/Bottom/Clear" to="System/ViewContainer/Viewport/Screen" method="create_new_image"]
 [connection signal="color_changed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
 [connection signal="popup_closed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
 [connection signal="pressed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
-[connection signal="color_changed" from="UI/Bottom/ColorDroper2" to="UI/Bottom/ColorDroper2" method="_on_ColorDroper2_color_changed"]
-[connection signal="value_changed" from="UI/Bottom/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
+[connection signal="item_selected" from="UI/Bottom/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
 [connection signal="value_changed" from="UI/Bottom/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
+[connection signal="item_selected" from="UI/Bottom/Background" to="System/ViewContainer/Viewport/Background" method="change_background"]
 [connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
 [connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
 [connection signal="popup_hide" from="UI/ProjectLoader" to="UI/ProjectLoader" method="cross_allowed"]
-[connection signal="item_selected" from="UI/Brushes" to="System/ViewContainer/Viewport/Screen" method="change_brush"]
+[connection signal="item_selected" from="UI/TextureLoader" to="System/ViewContainer/Viewport/Screen" method="change_brush"]
 [connection signal="item_selected" from="UI/Layers" to="UI/Layers" method="_on_Layers_item_selected"]
 [connection signal="pressed" from="UI/Layers/Add" to="UI/Layers" method="_on_Add_pressed"]
 [connection signal="pressed" from="UI/Layers/Remove" to="UI/Layers" method="_on_Remove_pressed"]
 [connection signal="text_entered" from="UI/Layers/LineEdit" to="UI/Layers" method="_on_LineEdit_text_entered"]
-
-[editable path="UI"]
+[connection signal="pressed" from="UI/CrossList/Plus" to="UI/CrossList" method="_on_Plus_pressed"]

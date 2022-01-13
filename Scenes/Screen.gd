@@ -1,6 +1,7 @@
 extends Node2D
 
-onready var window_size : Vector2 = OS.get_window_safe_area().size
+onready var window_size_x : int = OS.get_window_safe_area().size.x
+onready var window_size_y : int = OS.get_window_safe_area().size.y
 
 onready var screen_rect : Rect2 = get_viewport_rect()
 var is_allowed : bool = true
@@ -10,11 +11,11 @@ var final_pos : Vector2
 
 var img_storage : Image
 var img_texture : ImageTexture = ImageTexture.new()
-
+#--------------------------------------------------------------------------
 var current_mode : GDScript = Blend_Brush
 
 #------Use of class for the sake of not having to check the tool all the time--------
-enum Modes { BRUSH = 1, ERASER = 2, PIXEL = 3, BLIT_BRUSH}
+enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
 const MODES = {
 	Modes.BRUSH : Blend_Brush,
 	Modes.ERASER : Eraser,
@@ -23,28 +24,14 @@ const MODES = {
 }
 
 
-func change_mode(value: float) -> void:
-	G.mode = int(value)
+func change_mode(index: int) -> void:
+	G.mode = index
 	img_storage.lock()  # why does the image get unlocked in the middle of nowhere
 	current_mode = MODES[G.mode]
-	reinitialize()
 	
-#----------------Initailizer---------------------------------------
-func reinitialize() -> void:
-	match G.mode:
-		2:
-			G.eraser.create(G.brush.get_size().x, G.brush.get_size().y, false, Image.FORMAT_RGBA8)
-		4:
-			G.blit_brush.create(G.brush.get_size().x, G.brush.get_size().y, false, Image.FORMAT_RGBA8)
-			G.blit_brush.fill(Color(G.cross_color))
-		_:
-			pass
-			
-	if G.size != G.brush.get_size().x:
-		G.brush.resize(G.size, G.size, 4)
-		G.brush_rect = G.brush.get_used_rect()
-		G.eraser.create(G.size, G.size, false, Image.FORMAT_RGBA8)
-		G.blit_brush.resize(G.size, G.size, 4)
+	G.reinitialize()
+	
+
 	
 #----------------change brush-------------------------------------------
 
@@ -52,7 +39,7 @@ func change_brush(index: int) -> void:
 	G.brush = G.brush_list[index] ####
 	G.brush_rect = G.brush.get_used_rect() ####
 	
-	reinitialize()
+	G.reinitialize()
 #-----------------------------------------------------------------------
 
 func _ready() -> void:
@@ -61,7 +48,7 @@ func _ready() -> void:
 
 func create_new_image():
 	var img := Image.new()
-	img.create(window_size.x, window_size.y, false, Image.FORMAT_RGBA8)
+	img.create(window_size_x, window_size_y, false, Image.FORMAT_RGBA8)
 	img_storage = img
 	img_storage.lock()
 	update()
@@ -119,7 +106,7 @@ func save_image_to_disk():
 #----------------------------------Renderer---------------------------
 func _draw():
 	img_texture.create_from_image(img_storage)
-	draw_texture(img_texture, Vector2.ZERO, Color( 1, 1, 1, 1 ), null)
+	draw_texture(img_texture, Vector2.ZERO)
 
 
 # --------------------------Color x Size ----------------------------
@@ -134,7 +121,8 @@ func color_dropper_toggle_is_allowed() -> void:
 
 func _on_size_value_changed(value: float) -> void:
 	G.size = int(value)
-	reinitialize()
+	
+	G.reinitialize()
 	
 
 func change_color(color: Color) -> void:

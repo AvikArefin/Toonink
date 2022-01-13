@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/sprink.png-9a2c752aba8ace2cb768bb7aae4a111d.image"
+
+[deps]
+
+source_file="res://Assets/brushes/sprink.png"
+dest_files=[ "res://.import/sprink.png-9a2c752aba8ace2cb768bb7aae4a111d.image" ]
+
+[params]
+
