@@ -160,8 +160,8 @@ margin_top = -32.0
 margin_right = 512.0
 margin_bottom = -8.0
 hint_tooltip = "Background"
-text = "Line"
-items = [ "Line", null, false, 0, null, "Grid", null, false, 1, null, "Box", null, false, 2, null, "Slanted", null, false, 3, null, "Dotted", null, false, 4, null, "Picture", null, false, 5, null ]
+text = "None"
+items = [ "None", null, false, 0, null, "Line", null, false, 1, null, "Grid", null, false, 2, null, "Box", null, false, 3, null, "Slanted", null, false, 4, null, "Dotted", null, false, 5, null, "Colored", null, false, 6, null, "Picture", null, false, 7, null ]
 selected = 0
 __meta__ = {
 "_edit_use_anchors_": false

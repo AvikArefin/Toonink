@@ -45,7 +45,7 @@ func _ready() -> void:
 
 func create_new_image():
 	var img := Image.new()
-	img.create(G.window_size_x, G.window_size_y, false, Image.FORMAT_RGBA8)
+	img.create(G.window_size_x, G.window_size_y, true, Image.FORMAT_RGBA8)
 	img_storage = img
 	img_storage.lock()
 	update()
@@ -113,12 +113,13 @@ func color_dropper_toggle_is_allowed() -> void:
 #	when the color_droper is closed
 	if is_allowed:
 		previous_pos = get_local_mouse_position()
+
 #		change the brush color now..
 		G.blit_brush.fill(G.cross_color)
-
-
-
-
+		
+#		change the background color now..
+		$"../Background".update()
+		
 
 func _on_size_value_changed(value: float) -> void:
 	G.size = int(value)
