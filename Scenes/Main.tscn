@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Scenes/Top.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/TextureLoader.gd" type="Script" id=2]
@@ -6,7 +6,10 @@
 [ext_resource path="res://Scenes/ProjectLoader.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Plus.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Background.gd" type="Script" id=6]
+[ext_resource path="res://Assets/Add.png" type="Texture" id=7]
+[ext_resource path="res://Tests/view_stranger.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Layers.gd" type="Script" id=9]
+[ext_resource path="res://Scenes/TransparentChecker.tscn" type="PackedScene" id=10]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
@@ -25,50 +28,45 @@ __meta__ = {
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 168.0
-margin_top = 24.0
+margin_top = 40.0
 margin_right = -2.0
 margin_bottom = -41.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="System/ViewContainer"]
-size = Vector2( 1024, 600 )
-transparent_bg = true
+size = Vector2( 1152, 672 )
 handle_input_locally = false
 render_target_update_mode = 3
 
+[node name="TransparentChecker" parent="System/ViewContainer/Viewport" instance=ExtResource( 10 )]
+
 [node name="Background" type="Node2D" parent="System/ViewContainer/Viewport"]
-position = Vector2( 0, 21 )
 script = ExtResource( 6 )
 __meta__ = {
 "_editor_description_": ""
 }
 
 [node name="Screen" type="Node2D" parent="System/ViewContainer/Viewport"]
-position = Vector2( 0, 21 )
 script = ExtResource( 3 )
 __meta__ = {
 "_editor_description_": ""
 }
 
+[node name="view" type="Camera2D" parent="System/ViewContainer/Viewport"]
+anchor_mode = 0
+current = true
+script = ExtResource( 8 )
+
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Top" type="Label" parent="UI"]
+[node name="Bottom" type="Panel" parent="UI"]
 anchor_right = 1.0
 margin_bottom = 24.0
-align = 1
-script = ExtResource( 1 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
-
-[node name="Bottom" type="Panel" parent="UI"]
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_top = -41.0
-margin_bottom = -1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -76,10 +74,9 @@ __meta__ = {
 [node name="Load" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
-margin_top = -32.0
-margin_right = 64.0
-margin_bottom = -8.0
+margin_top = -24.0
+margin_right = 42.0
+margin_bottom = -1.0
 text = "LOAD"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -88,10 +85,10 @@ __meta__ = {
 [node name="Save" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 72.0
-margin_top = -32.0
-margin_right = 128.0
-margin_bottom = -8.0
+margin_left = 48.0
+margin_top = -24.0
+margin_right = 90.0
+margin_bottom = -1.0
 text = "SAVE"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -100,10 +97,10 @@ __meta__ = {
 [node name="Clear" type="Button" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 136.0
-margin_top = -32.0
-margin_right = 192.0
-margin_bottom = -8.0
+margin_left = 96.0
+margin_top = -24.0
+margin_right = 144.0
+margin_bottom = -1.0
 text = "CLEAR"
 __meta__ = {
 "_edit_use_anchors_": false
@@ -112,10 +109,9 @@ __meta__ = {
 [node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 400.0
-margin_top = -32.0
-margin_right = 432.0
-margin_bottom = -8.0
+margin_left = 304.0
+margin_top = -24.0
+margin_right = 328.0
 flat = true
 color = Color( 1, 0, 0, 1 )
 __meta__ = {
@@ -125,10 +121,10 @@ __meta__ = {
 [node name="Mode" type="OptionButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 200.0
-margin_top = -32.0
-margin_right = 288.0
-margin_bottom = -8.0
+margin_left = 152.0
+margin_top = -24.0
+margin_right = 210.0
+margin_bottom = -1.0
 hint_tooltip = "Cross mode"
 text = "Blend"
 align = 1
@@ -138,10 +134,10 @@ selected = 0
 [node name="size" type="SpinBox" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 296.0
-margin_top = -32.0
-margin_right = 392.0
-margin_bottom = -8.0
+margin_left = 216.0
+margin_top = -24.0
+margin_right = 296.0
+margin_bottom = -1.0
 min_value = 1.0
 max_value = 50.0
 value = 9.0
@@ -155,10 +151,10 @@ __meta__ = {
 [node name="Background" type="OptionButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 440.0
-margin_top = -32.0
-margin_right = 512.0
-margin_bottom = -8.0
+margin_left = 336.0
+margin_top = -24.0
+margin_right = 408.0
+margin_bottom = -1.0
 hint_tooltip = "Background"
 text = "None"
 items = [ "None", null, false, 0, null, "Line", null, false, 1, null, "Grid", null, false, 2, null, "Box", null, false, 3, null, "Slanted", null, false, 4, null, "Dotted", null, false, 5, null, "Colored", null, false, 6, null, "Picture", null, false, 7, null ]
@@ -170,16 +166,26 @@ __meta__ = {
 [node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 520.0
-margin_top = -32.0
-margin_right = 552.0
-margin_bottom = -8.0
+margin_left = 408.0
+margin_top = -24.0
+margin_right = 438.0
 flat = true
 __meta__ = {
 "_editor_description_": "For some reason this node also works when the signal is feed to
 \"color_dropper_toggle_is_allowed()\"
 function in the 
 $Screen ---- node"
+}
+
+[node name="Info" type="Label" parent="UI"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -336.0
+margin_bottom = 24.0
+align = 2
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
 }
 
 [node name="ProjectLoader" type="FileDialog" parent="UI"]
@@ -196,13 +202,11 @@ script = ExtResource( 4 )
 
 [node name="TextureLoader" type="ItemList" parent="UI"]
 margin_left = 96.0
-margin_top = 32.0
+margin_top = 40.0
 margin_right = 160.0
-margin_bottom = 368.0
+margin_bottom = 376.0
 rect_clip_content = false
-max_text_lines = 3
 auto_height = true
-max_columns = 2
 same_column_width = true
 icon_mode = 0
 script = ExtResource( 2 )
@@ -216,21 +220,29 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -250.0
-margin_top = -273.0
+margin_top = -249.0
 margin_right = -10.0
-margin_bottom = -49.0
+margin_bottom = -9.0
 auto_height = true
 script = ExtResource( 9 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
+[node name="Label" type="Label" parent="UI/Layers"]
+margin_left = 16.0
+margin_top = 208.0
+margin_right = 220.0
+margin_bottom = 233.0
+text = "No layer selected"
+align = 1
+
 [node name="Add" type="Button" parent="UI/Layers"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = 16.0
 margin_top = -56.0
-margin_right = 112.0
+margin_right = 104.0
 margin_bottom = -32.0
 focus_mode = 0
 text = "+ ADD"
@@ -243,35 +255,28 @@ anchor_left = 1.0
 anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -112.0
+margin_left = -104.0
 margin_top = -56.0
-margin_right = -8.0
+margin_right = -16.0
 margin_bottom = -32.0
 text = "X REMOVE"
 
 [node name="LineEdit" type="LineEdit" parent="UI/Layers"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 8.0
+margin_left = 16.0
 margin_top = -88.0
-margin_right = 232.0
+margin_right = 224.0
 margin_bottom = -64.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Label" type="Label" parent="UI/Layers"]
-margin_top = 200.0
-margin_right = 240.0
-margin_bottom = 214.0
-text = "No layer selected"
-align = 1
-
 [node name="CrossList" type="VBoxContainer" parent="UI"]
 margin_left = 8.0
-margin_top = 32.0
+margin_top = 40.0
 margin_right = 72.0
-margin_bottom = 440.0
+margin_bottom = 448.0
 script = ExtResource( 5 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -283,6 +288,18 @@ margin_bottom = 64.0
 hint_tooltip = "Add Profile"
 texture_normal = SubResource( 1 )
 stretch_mode = 3
+
+[node name="PaintBrush" type="TextureButton" parent="UI/CrossList"]
+margin_top = 68.0
+margin_right = 64.0
+margin_bottom = 132.0
+texture_normal = ExtResource( 7 )
+
+[node name="TextureButton2" type="TextureButton" parent="UI/CrossList"]
+margin_top = 136.0
+margin_right = 64.0
+margin_bottom = 200.0
+texture_normal = ExtResource( 7 )
 
 [connection signal="pressed" from="UI/Bottom/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Bottom/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]

@@ -18,6 +18,11 @@ func _projectloader(index : int) -> void:
 
 func _on_ProjectLoader_file_selected(path: String) -> void:
 	if mode == MODE_OPEN_FILE:
+#		var img := Image.new()
+#		img.create(G.window_size_x, G.window_size_y, true, Image.FORMAT_RGBA8)
+#		img.create(G.window_size_x, G.window_size_y, true, Image.FORMAT_RGBA8)
+		
+#		Screen.img_storage = img
 		
 		Screen.img_storage = Image.new()
 		Screen.img_storage.load(path)

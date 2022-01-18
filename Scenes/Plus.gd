@@ -1,6 +1,6 @@
 extends VBoxContainer
 
-const _cross : PackedScene = preload("res://Scenes/cross.tscn")
+const _cross : PackedScene = preload("res://Scenes/NewCross/cross.tscn")
 
 func _on_Plus_pressed() -> void:
 	var x = _cross.instance()

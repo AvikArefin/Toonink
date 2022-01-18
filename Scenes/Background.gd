@@ -1,6 +1,6 @@
 extends Node2D
 
-var multi_dots : PoolVector2Array = []
+var multi_dots : PoolVector2Array 
 
 var lines : int = 10
 var start : int = 1
@@ -10,7 +10,7 @@ var line_width : float = 1.0
 var line_radius : float = 1.0
 var line_color : Color = Color.black
 
-var _graph_no : int = 2
+var _graph_no : int = 0
 # 1 = line; 2 = circles; 3 = texture background |
 
 var background := Image.new()
@@ -42,7 +42,7 @@ func change_background(index: int) -> void:
 
 func none() -> void:
 #	background = Texture.new()
-	_graph_no = 5
+	_graph_no = 0
 	
 
 func line() -> void:
@@ -110,6 +110,10 @@ func picture() -> void:
 var tex := ImageTexture.new()
 func _draw() -> void:
 	match _graph_no:
+		0:
+#			clears the background
+			pass
+
 		1:
 			draw_multiline(multi_dots, line_color, line_width, true)
 		2:
@@ -122,9 +126,7 @@ func _draw() -> void:
 		4:
 			tex.create_from_image(background)
 			draw_texture(tex, Vector2.ZERO)
-		5:
-#			clears the background
-			pass
+
 
 
 

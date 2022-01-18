@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/angle9x9.png-561d05ee55e96642a532873da3e1e32d.image"
+
+[deps]
+
+source_file="res://Assets/brushes/angle9x9.png"
+dest_files=[ "res://.import/angle9x9.png-561d05ee55e96642a532873da3e1e32d.image" ]
+
+[params]
+

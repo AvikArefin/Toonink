@@ -29,4 +29,3 @@ func zoom_at_point(zoom_change, point) -> void:
 	
 	global_position = c1
 	
-	G.zoom_lv = round(100/zoom.x)

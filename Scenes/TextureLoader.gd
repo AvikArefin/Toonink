@@ -8,6 +8,7 @@ func _ready() -> void:
 	G.brush = G.brush_list[0] #	could cause problem...
 	G.brush_rect = G.brush.get_used_rect()
 	
+	G.eraser.create(G.brush.get_width(), G.brush.get_height(), true, Image.FORMAT_RGBA8)
 	G.blit_brush.copy_from(G.brush_list[0])
 	G.blit_brush.fill(Color(G.cross_color))
 	G.reinitialize()
@@ -39,4 +40,5 @@ func _loader(_name_of_brush: String):
 	_img.convert(Image.FORMAT_RGBA8)
 	G.brush_list.append(_img)
 	
+# load is being deprecated in 4.0? what should i use then?
 

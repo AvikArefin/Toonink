@@ -33,6 +33,7 @@ func change_mode(index: int) -> void:
 #----------------change brush-------------------------------------------
 
 func change_brush(index: int) -> void:
+	print('change brush')
 	G.brush = G.brush_list[index] ####
 	G.brush_rect = G.brush.get_used_rect() ####
 	
@@ -50,22 +51,32 @@ func create_new_image():
 	img_storage.lock()
 	update()
 
-
+var item_goes_brr : Vector2
 #----------------------------INPUT-SYSTEM--------------------------------
 func _input(event):
 	if screen_rect.has_point(get_global_mouse_position()) && is_allowed:
-		if event is InputEventMouseButton:
-			previous_pos = get_local_mouse_position()
+		if event.is_action_pressed("primary"):
+			previous_pos = get_local_mouse_position().round()
 			current_mode.draw(img_storage, previous_pos)
 			update()
+#		elif Input.is_action_pressed("wheel_up"):
+#			position.x -= 10
+#		elif Input.is_action_pressed("wheel_down"):
+#			position.x += 10
+
+#		Make a script so that you can not go beyond the veiwport
+#		food for thought, what would you do when implementing the
+#		zoom mechanic?
 
 		if event is InputEventMouseMotion:
 			if Input.is_action_pressed("primary"):
-				final_pos = get_local_mouse_position()
+				final_pos = get_local_mouse_position().round()
+				print(final_pos)
 				draw_fill_gap(previous_pos, final_pos)
 #				current_mode.draw(img_storage, previous_pos)
 				previous_pos = final_pos
 				update()
+
 
 func draw_fill_gap(start : Vector2, end : Vector2) -> void:
 	var dx := int(abs(end.x - start.x))
@@ -86,18 +97,6 @@ func draw_fill_gap(start : Vector2, end : Vector2) -> void:
 			y += sy
 			
 		current_mode.draw(img_storage, Vector2(x, y))
-		
-
-#-------------------------------Fill up tool------------------------------
-func fill_up():
-	img_storage.fill(G.cross_color_2)
-	img_storage.lock()
-
-#---------------------------------Recorder-----------------------------
-# Probably useless atm...
-func save_image_to_disk():
-	img_storage.unlock()
-	var _err = img_storage.save_png("test_png.png")
 
 
 #----------------------------------Renderer---------------------------
@@ -107,6 +106,8 @@ func _draw():
 
 
 # --------------------------Color x Size ----------------------------
+onready var Background : Node2D = $"../Background" as Node2D
+
 # when color droper is selected
 func color_dropper_toggle_is_allowed() -> void:
 	is_allowed = !is_allowed
@@ -116,10 +117,9 @@ func color_dropper_toggle_is_allowed() -> void:
 
 #		change the brush color now..
 		G.blit_brush.fill(G.cross_color)
-		
+
 #		change the background color now..
-		$"../Background".update()
-		
+		Background.update()
 
 func _on_size_value_changed(value: float) -> void:
 	G.size = int(value)
