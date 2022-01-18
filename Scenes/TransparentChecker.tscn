@@ -5,9 +5,9 @@
 
 [sub_resource type="ShaderMaterial" id=1]
 shader = ExtResource( 1 )
-shader_param/size = 50.0
+shader_param/size = 10.0
 shader_param/alpha = 1.0
-shader_param/color1 = Color( 0.337255, 0.337255, 0.337255, 1 )
+shader_param/color1 = Color( 0.45098, 0.45098, 0.45098, 1 )
 shader_param/color2 = Color( 1, 1, 1, 1 )
 shader_param/offset = Vector2( 0, 0 )
 shader_param/scale = Vector2( 0, 0 )
