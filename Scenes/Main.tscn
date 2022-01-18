@@ -58,20 +58,20 @@ __meta__ = {
 }
 
 [node name="view" type="Camera2D" parent="System/ViewContainer/Viewport"]
-anchor_mode = 0
+offset = Vector2( 576, 335 )
 current = true
 script = ExtResource( 8 )
 
 [node name="UI" type="CanvasLayer" parent="."]
 
-[node name="Bottom" type="Panel" parent="UI"]
+[node name="Bar" type="Panel" parent="UI"]
 anchor_right = 1.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Load" type="Button" parent="UI/Bottom"]
+[node name="Load" type="Button" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_top = -24.0
@@ -82,7 +82,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Save" type="Button" parent="UI/Bottom"]
+[node name="Save" type="Button" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 48.0
@@ -94,7 +94,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Clear" type="Button" parent="UI/Bottom"]
+[node name="Clear" type="Button" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 96.0
@@ -106,7 +106,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
+[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 304.0
@@ -118,7 +118,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Mode" type="OptionButton" parent="UI/Bottom"]
+[node name="Mode" type="OptionButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 152.0
@@ -131,7 +131,7 @@ align = 1
 items = [ "Blend", null, false, 0, null, "Eraser", null, false, 1, null, "Pen", null, false, 2, null, "Blit", null, false, 3, null ]
 selected = 0
 
-[node name="size" type="SpinBox" parent="UI/Bottom"]
+[node name="size" type="SpinBox" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 216.0
@@ -148,7 +148,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Background" type="OptionButton" parent="UI/Bottom"]
+[node name="Background" type="OptionButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 336.0
@@ -163,7 +163,7 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bottom"]
+[node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 408.0
@@ -231,9 +231,9 @@ __meta__ = {
 
 [node name="Label" type="Label" parent="UI/Layers"]
 margin_left = 16.0
-margin_top = 208.0
+margin_top = 144.0
 margin_right = 220.0
-margin_bottom = 233.0
+margin_bottom = 169.0
 text = "No layer selected"
 align = 1
 
@@ -241,9 +241,9 @@ align = 1
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = -56.0
+margin_top = -32.0
 margin_right = 104.0
-margin_bottom = -32.0
+margin_bottom = -8.0
 focus_mode = 0
 text = "+ ADD"
 __meta__ = {
@@ -256,18 +256,18 @@ anchor_top = 1.0
 anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = -104.0
-margin_top = -56.0
+margin_top = -32.0
 margin_right = -16.0
-margin_bottom = -32.0
+margin_bottom = -8.0
 text = "X REMOVE"
 
 [node name="LineEdit" type="LineEdit" parent="UI/Layers"]
 anchor_top = 1.0
 anchor_bottom = 1.0
 margin_left = 16.0
-margin_top = -88.0
+margin_top = -64.0
 margin_right = 224.0
-margin_bottom = -64.0
+margin_bottom = -40.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -301,18 +301,18 @@ margin_right = 64.0
 margin_bottom = 200.0
 texture_normal = ExtResource( 7 )
 
-[connection signal="pressed" from="UI/Bottom/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
-[connection signal="pressed" from="UI/Bottom/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
-[connection signal="pressed" from="UI/Bottom/Clear" to="System/ViewContainer/Viewport/Screen" method="create_new_image"]
-[connection signal="color_changed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
-[connection signal="popup_closed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
-[connection signal="pressed" from="UI/Bottom/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
-[connection signal="item_selected" from="UI/Bottom/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
-[connection signal="value_changed" from="UI/Bottom/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
-[connection signal="item_selected" from="UI/Bottom/Background" to="System/ViewContainer/Viewport/Background" method="change_background"]
-[connection signal="color_changed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Background" method="change_line_color"]
-[connection signal="popup_closed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
-[connection signal="pressed" from="UI/Bottom/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="pressed" from="UI/Bar/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
+[connection signal="pressed" from="UI/Bar/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
+[connection signal="pressed" from="UI/Bar/Clear" to="System/ViewContainer/Viewport/Screen" method="create_new_image"]
+[connection signal="color_changed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
+[connection signal="popup_closed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="pressed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="item_selected" from="UI/Bar/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
+[connection signal="value_changed" from="UI/Bar/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
+[connection signal="item_selected" from="UI/Bar/Background" to="System/ViewContainer/Viewport/Background" method="change_background"]
+[connection signal="color_changed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Background" method="change_line_color"]
+[connection signal="popup_closed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
+[connection signal="pressed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
 [connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
 [connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
 [connection signal="popup_hide" from="UI/ProjectLoader" to="UI/ProjectLoader" method="cross_allowed"]

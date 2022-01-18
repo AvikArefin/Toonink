@@ -1,6 +1,5 @@
 extends Camera2D
 
-
 var zoom_step = 1.1
 
 func _input(event) -> void:
@@ -26,9 +25,14 @@ func zoom_at_point(zoom_change, point) -> void:
 	zoom = z1
 
 	global_position = c1
-	
+
 	G.zoom_lv = str(round(100/zoom.x))
 
-#func reset_zoom() -> void:
-#	zoom = Vector2.ONE
-#	global_position = (OS.window_size/2)
+func reset_zoom() -> void:
+	print("reset_zoom")
+	zoom = Vector2.ONE
+	G.zoom_lv = "100"
+	global_position = Vector2.ZERO
+
+
+# Limit how much you can zoom out...

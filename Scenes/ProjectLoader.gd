@@ -2,6 +2,7 @@ extends FileDialog
 
 const TEST := Vector2(500, 300)
 onready var Screen : Node2D = $"../../System/ViewContainer/Viewport/Screen"
+onready var View : Camera2D = $"../../System/ViewContainer/Viewport/view"
 
 func _projectloader(index : int) -> void:
 	G.zoom_able = false
@@ -33,7 +34,8 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 		
 		G.stored_img_x = str(Screen.img_storage.get_size().x)
 		G.stored_img_y = str(Screen.img_storage.get_size().y)
-
+		
+		View.reset_zoom()
 
 func save_confirmed() -> void:
 	if mode == MODE_SAVE_FILE:
@@ -41,3 +43,4 @@ func save_confirmed() -> void:
 
 func cross_allowed() -> void:
 	Screen.is_allowed = true
+	G.zoom_able = true

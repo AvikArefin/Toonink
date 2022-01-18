@@ -111,9 +111,7 @@ var tex := ImageTexture.new()
 func _draw() -> void:
 	match _graph_no:
 		0:
-#			clears the background
-			pass
-
+			pass#	clears the background
 		1:
 			draw_multiline(multi_dots, line_color, line_width, true)
 		2:
