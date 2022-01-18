@@ -60,6 +60,8 @@ __meta__ = {
 [node name="view" type="Camera2D" parent="System/ViewContainer/Viewport"]
 offset = Vector2( 576, 335 )
 current = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
 script = ExtResource( 8 )
 
 [node name="UI" type="CanvasLayer" parent="."]
