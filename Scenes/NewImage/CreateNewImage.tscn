@@ -1,0 +1,241 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Scenes/NewImage/CreateNewImage.gd" type="Script" id=1]
+[ext_resource path="res://assets/graphics/misc/portrait.png" type="Texture" id=2]
+[ext_resource path="res://assets/graphics/misc/landscape.png" type="Texture" id=3]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_2.png" type="Texture" id=4]
+[ext_resource path="res://assets/graphics/misc/lock_aspect.png" type="Texture" id=5]
+[ext_resource path="res://assets/graphics/misc/lock_aspect_guides.png" type="Texture" id=6]
+
+[node name="CreateNewImage" type="ConfirmationDialog"]
+margin_right = 571.0
+margin_bottom = 241.0
+rect_min_size = Vector2( 375, 222 )
+window_title = "New..."
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 563.0
+margin_bottom = 202.0
+size_flags_horizontal = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProjectName" type="HBoxContainer" parent="VBoxContainer"]
+margin_right = 400.0
+margin_bottom = 24.0
+
+[node name="NameLabel" type="Label" parent="VBoxContainer/ProjectName"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+text = "Project Name:"
+
+[node name="NameInput" type="LineEdit" parent="VBoxContainer/ProjectName"]
+margin_left = 104.0
+margin_right = 400.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+placeholder_text = "Enter name... (Default \"untitled\")"
+
+[node name="ImageSize" type="Label" parent="VBoxContainer"]
+margin_top = 28.0
+margin_right = 400.0
+margin_bottom = 42.0
+text = "Image Size"
+
+[node name="HSeparator" type="HSeparator" parent="VBoxContainer"]
+margin_top = 46.0
+margin_right = 400.0
+margin_bottom = 50.0
+
+[node name="TemplatesContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 54.0
+margin_right = 400.0
+margin_bottom = 74.0
+
+[node name="TemplatesLabel" type="Label" parent="VBoxContainer/TemplatesContainer"]
+margin_top = 3.0
+margin_right = 100.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 100, 0 )
+text = "Templates:"
+
+[node name="TemplatesOptions" type="OptionButton" parent="VBoxContainer/TemplatesContainer"]
+margin_left = 104.0
+margin_right = 400.0
+margin_bottom = 20.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+toggle_mode = false
+text = "Default"
+items = [ "Default", null, false, 0, null ]
+selected = 0
+
+[node name="SizeContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 78.0
+margin_right = 400.0
+margin_bottom = 130.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="VBoxContainer/SizeContainer"]
+margin_right = 387.0
+margin_bottom = 52.0
+size_flags_horizontal = 3
+
+[node name="WidthContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+margin_right = 387.0
+margin_bottom = 24.0
+
+[node name="WidthLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+text = "Width:"
+
+[node name="WidthValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer"]
+margin_left = 104.0
+margin_right = 387.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
+
+[node name="HeightContainer" type="HBoxContainer" parent="VBoxContainer/SizeContainer/VBoxContainer"]
+margin_top = 28.0
+margin_right = 387.0
+margin_bottom = 52.0
+
+[node name="HeightLabel" type="Label" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+margin_top = 5.0
+margin_right = 100.0
+margin_bottom = 19.0
+rect_min_size = Vector2( 100, 0 )
+text = "Height:"
+
+[node name="HeightValue" type="SpinBox" parent="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer"]
+margin_left = 104.0
+margin_right = 387.0
+margin_bottom = 24.0
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 16384.0
+value = 64.0
+suffix = "px"
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeContainer" groups=["UIButtons"]]
+margin_left = 391.0
+margin_right = 400.0
+margin_bottom = 52.0
+texture = ExtResource( 6 )
+
+[node name="AspectRatioButton" type="TextureButton" parent="VBoxContainer/SizeContainer/TextureRect" groups=["UIButtons"]]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -4.5
+margin_top = -9.0
+margin_right = 11.5
+margin_bottom = 7.0
+hint_tooltip = "Lock aspect ratio"
+mouse_default_cursor_shape = 2
+toggle_mode = true
+texture_normal = ExtResource( 4 )
+texture_pressed = ExtResource( 5 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SizeButtonsContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 134.0
+margin_right = 400.0
+margin_bottom = 154.0
+
+[node name="PortraitButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
+margin_right = 20.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Portrait"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/PortraitButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LandscapeButton" type="Button" parent="VBoxContainer/SizeButtonsContainer" groups=["UIButtons"]]
+margin_left = 24.0
+margin_right = 44.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 20, 0 )
+hint_tooltip = "Landscape"
+focus_mode = 0
+mouse_default_cursor_shape = 2
+toggle_mode = true
+
+[node name="TextureRect" type="TextureRect" parent="VBoxContainer/SizeButtonsContainer/LandscapeButton"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -8.0
+margin_top = -8.0
+margin_right = 8.0
+margin_bottom = 8.0
+texture = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="FillColorContainer" type="HBoxContainer" parent="VBoxContainer"]
+margin_top = 158.0
+margin_right = 400.0
+margin_bottom = 178.0
+
+[node name="FillColorLabel" type="Label" parent="VBoxContainer/FillColorContainer"]
+margin_top = 3.0
+margin_right = 100.0
+margin_bottom = 17.0
+rect_min_size = Vector2( 100, 0 )
+text = "Fill with color:"
+
+[node name="FillColor" type="ColorPickerButton" parent="VBoxContainer/FillColorContainer"]
+margin_left = 104.0
+margin_right = 400.0
+margin_bottom = 20.0
+rect_min_size = Vector2( 64, 20 )
+mouse_default_cursor_shape = 2
+size_flags_horizontal = 3
+color = Color( 0, 0, 0, 0 )
+
+[connection signal="confirmed" from="." to="." method="_on_CreateNewImage_confirmed"]
+[connection signal="item_selected" from="VBoxContainer/TemplatesContainer/TemplatesOptions" to="." method="_on_TemplatesOptions_item_selected"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/WidthContainer/WidthValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="value_changed" from="VBoxContainer/SizeContainer/VBoxContainer/HeightContainer/HeightValue" to="." method="_on_SizeValue_value_changed"]
+[connection signal="toggled" from="VBoxContainer/SizeContainer/TextureRect/AspectRatioButton" to="." method="_on_AspectRatioButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/SizeButtonsContainer/PortraitButton" to="." method="_on_PortraitButton_toggled"]
+[connection signal="toggled" from="VBoxContainer/SizeButtonsContainer/LandscapeButton" to="." method="_on_LandscapeButton_toggled"]

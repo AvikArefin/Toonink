@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/gcircle.png-1bfd47d93be66f0104e7209b8184ccbb.image"
+
+[deps]
+
+source_file="res://assets/brushes/gcircle.png"
+dest_files=[ "res://.import/gcircle.png-1bfd47d93be66f0104e7209b8184ccbb.image" ]
+
+[params]
+
