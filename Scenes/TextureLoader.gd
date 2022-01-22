@@ -1,6 +1,6 @@
 extends ItemList
 
-const brushes_dir := 'res://Assets/brushes/'
+const brushes_dir := 'res://assets/brushes/'
 
 func _ready() -> void:
 	load_brushes()

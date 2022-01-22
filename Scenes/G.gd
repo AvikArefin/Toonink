@@ -48,10 +48,10 @@ func reinitialize() -> void:
 #	Add match statements to branch code.
 	if size != brush.get_size().x:
 
-		brush.resize(size, size, Image.INTERPOLATE_LANCZOS)
+		brush.resize(size, size, Image.INTERPOLATE_TRILINEAR)
 		brush_rect = brush.get_used_rect()
 		eraser.create(size, size, false, Image.FORMAT_RGBA8)
-		blit_brush.resize(size, size, Image.INTERPOLATE_LANCZOS)
+		blit_brush.resize(size, size, Image.INTERPOLATE_TRILINEAR)
 
 	w = brush.get_width() / 2.0
 	h = brush.get_height() / 2.0

@@ -6,8 +6,8 @@
 [ext_resource path="res://Scenes/ProjectLoader.gd" type="Script" id=4]
 [ext_resource path="res://Scenes/Plus.gd" type="Script" id=5]
 [ext_resource path="res://Scenes/Background.gd" type="Script" id=6]
-[ext_resource path="res://Assets/Add.png" type="Texture" id=7]
-[ext_resource path="res://Tests/view_stranger.gd" type="Script" id=8]
+[ext_resource path="res://assets/Add.png" type="Texture" id=7]
+[ext_resource path="res://Scenes/view.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Layers.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/TransparentChecker.tscn" type="PackedScene" id=10]
 
@@ -33,14 +33,15 @@ margin_right = -2.0
 margin_bottom = -41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
-stretch = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="Viewport" type="Viewport" parent="System/ViewContainer"]
 size = Vector2( 1152, 672 )
+transparent_bg = true
 handle_input_locally = false
+usage = 1
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="System/ViewContainer/Viewport" instance=ExtResource( 10 )]
