@@ -9,6 +9,7 @@ var mode : int
 var brush : Image
 #no need for brush_rect
 
+
 func _on_cross1_pressed() -> void:
 	G.size = size
 	G.cross_color = color
