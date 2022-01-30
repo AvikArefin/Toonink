@@ -119,10 +119,10 @@ func _draw() -> void:
 				draw_circle(_pos, line_radius, line_color)
 		3:
 			background.fill(line_color)
-			tex.create_from_image(background)
+			tex.create_from_image(background, 0)
 			draw_texture(tex, Vector2.ZERO)
 		4:
-			tex.create_from_image(background)
+			tex.create_from_image(background, 0)
 			draw_texture(tex, Vector2.ZERO)
 
 

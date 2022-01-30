@@ -18,8 +18,8 @@ var selected_layer : int # It seems there is some issue with it [the focus] goes
 var size : int = 16
 var cross_color := Color.red 
 var opacity : int = 100
-var mode : int
-var tex_img : Image
+var mode : int setget change_mode
+#var tex_img : Image
 
 #-------------- brushes and brush rects ---------------------
 var brush_list = []
@@ -29,13 +29,26 @@ var eraser := Image.new()
 var blit_brush := Image.new()
 var brush_rect : Rect2 
 
-export(Vector2) var brush_dis : Vector2
+var brush_dis : Vector2
 
-var w : float
-var h : float
+#-------------------mode changer-------------------------
+var current_mode : GDScript = Blend_Brush
+
+enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
+const MODES = {
+	Modes.BRUSH : Blend_Brush,
+	Modes.ERASER : Eraser,
+	Modes.PIXEL : Pixel,
+	Modes.BLIT_BRUSH : Blit_Brush
+}
+
+func change_mode(index: int) -> void:
+	current_mode = MODES[index]
+	G.reinitialize()
 
 #----------------Initailizer---------------------------------------
 func reinitialize() -> void:
+	
 	match mode:
 		2:
 			eraser.create(brush.get_width(), brush.get_height(), false, Image.FORMAT_RGBA8)
@@ -45,19 +58,17 @@ func reinitialize() -> void:
 		_:
 			pass
 
-#	Add match statements to branch code.
+#	Check if the size is okay.
 	if size != brush.get_size().x:
 
-		brush.resize(size, size, Image.INTERPOLATE_TRILINEAR)
+		brush.resize(size, size, 3)
 		brush_rect = brush.get_used_rect()
 		eraser.create(size, size, false, Image.FORMAT_RGBA8)
-		blit_brush.resize(size, size, Image.INTERPOLATE_TRILINEAR)
+		blit_brush.resize(size, size, 3)
 
-	w = brush.get_width() / 2.0
-	h = brush.get_height() / 2.0
+#	Readjust the brush center displacement
+	var w : float = brush.get_width() / 2.0
+	var h : float = brush.get_height() / 2.0
 	brush_dis = Vector2(w , h)
 
 # Fix the issue where the texture changes when the brush is resized...
-
-#Make a seperate reinitializer for sizeing...
-

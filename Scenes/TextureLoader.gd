@@ -33,11 +33,11 @@ func _loader(_name_of_brush: String):
 	var _brush_path := brushes_dir + _name_of_brush + '.png'
 	var _img := load(_brush_path) as Image
 	var _img_tex := ImageTexture.new()
-	_img_tex.create_from_image(_img, Image.FORMAT_RGBA8)
+	_img_tex.create_from_image(_img, 0)
 	add_item(_name_of_brush, _img_tex, true)
-#	Add the brush texture as an image of RGBA8 to the global brush_list
+#	Add the brush texture as an image of RGBAF to the global brush_list
 #	then select the first as the current brush
-	_img.convert(Image.FORMAT_RGBA8)
+	_img.convert(Image.FORMAT_RGBA8) #WTF
 	G.brush_list.append(_img)
 	
 # load is being deprecated in 4.0? what should i use then?

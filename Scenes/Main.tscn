@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://Scenes/Top.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/TextureLoader.gd" type="Script" id=2]
@@ -10,6 +10,8 @@
 [ext_resource path="res://Scenes/view.gd" type="Script" id=8]
 [ext_resource path="res://Scenes/Layers.gd" type="Script" id=9]
 [ext_resource path="res://Scenes/TransparentChecker.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Scenes/Mode.gd" type="Script" id=11]
+[ext_resource path="res://Scenes/PaintBrush.gd" type="Script" id=12]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
@@ -133,6 +135,10 @@ text = "Blend"
 align = 1
 items = [ "Blend", null, false, 0, null, "Eraser", null, false, 1, null, "Pen", null, false, 2, null, "Blit", null, false, 3, null ]
 selected = 0
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="size" type="SpinBox" parent="UI/Bar"]
 anchor_top = 1.0
@@ -292,17 +298,13 @@ hint_tooltip = "Add Profile"
 texture_normal = SubResource( 1 )
 stretch_mode = 3
 
-[node name="PaintBrush" type="TextureButton" parent="UI/CrossList"]
+[node name="Eraser" type="TextureButton" parent="UI/CrossList"]
 margin_top = 68.0
 margin_right = 64.0
 margin_bottom = 132.0
+hint_tooltip = "Eraser"
 texture_normal = ExtResource( 7 )
-
-[node name="TextureButton2" type="TextureButton" parent="UI/CrossList"]
-margin_top = 136.0
-margin_right = 64.0
-margin_bottom = 200.0
-texture_normal = ExtResource( 7 )
+script = ExtResource( 12 )
 
 [connection signal="pressed" from="UI/Bar/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Bar/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
@@ -310,7 +312,7 @@ texture_normal = ExtResource( 7 )
 [connection signal="color_changed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
 [connection signal="popup_closed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
 [connection signal="pressed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="color_dropper_toggle_is_allowed"]
-[connection signal="item_selected" from="UI/Bar/Mode" to="System/ViewContainer/Viewport/Screen" method="change_mode"]
+[connection signal="item_selected" from="UI/Bar/Mode" to="UI/Bar/Mode" method="_on_Mode_item_selected"]
 [connection signal="value_changed" from="UI/Bar/size" to="System/ViewContainer/Viewport/Screen" method="_on_size_value_changed"]
 [connection signal="item_selected" from="UI/Bar/Background" to="System/ViewContainer/Viewport/Background" method="change_background"]
 [connection signal="color_changed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Background" method="change_line_color"]
@@ -325,3 +327,4 @@ texture_normal = ExtResource( 7 )
 [connection signal="pressed" from="UI/Layers/Remove" to="UI/Layers" method="_on_Remove_pressed"]
 [connection signal="text_entered" from="UI/Layers/LineEdit" to="UI/Layers" method="_on_LineEdit_text_entered"]
 [connection signal="pressed" from="UI/CrossList/Plus" to="UI/CrossList" method="_on_Plus_pressed"]
+[connection signal="pressed" from="UI/CrossList/Eraser" to="UI/CrossList/Eraser" method="_on_Eraser_pressed"]

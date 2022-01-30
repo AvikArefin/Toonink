@@ -9,24 +9,24 @@ var final_pos : Vector2
 var img_storage : Image
 var img_texture : ImageTexture = ImageTexture.new()
 #--------------------------------------------------------------------------
-var current_mode : GDScript = Blend_Brush
-
-#------Use of class for the sake of not having to check the tool all the time--------
-enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
-const MODES = {
-	Modes.BRUSH : Blend_Brush,
-	Modes.ERASER : Eraser,
-	Modes.PIXEL : Pixel,
-	Modes.BLIT_BRUSH : Blit_Brush
-}
-
-
-func change_mode(index: int) -> void:
-	G.mode = index
-	img_storage.lock()  # why does the image get unlocked in the middle of nowhere
-	current_mode = MODES[G.mode]
-	
-	G.reinitialize()
+#var current_mode : GDScript = Blend_Brush
+#
+##------Use of class for the sake of not having to check the tool all the time--------
+#enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
+#const MODES = {
+#	Modes.BRUSH : Blend_Brush,
+#	Modes.ERASER : Eraser,
+#	Modes.PIXEL : Pixel,
+#	Modes.BLIT_BRUSH : Blit_Brush
+#}
+#
+#
+#func change_mode(index: int) -> void:
+#	G.mode = index
+#	img_storage.lock()  # why does the image get unlocked in the middle of nowhere
+#	current_mode = MODES[G.mode]
+#
+#	G.reinitialize()
 	
 
 	
@@ -41,7 +41,6 @@ func change_brush(index: int) -> void:
 #-----------------------------------------------------------------------
 
 func _ready() -> void:
-#	G.zoom_able = false # Valueless for the moment
 	create_new_image()
 
 func create_new_image():
@@ -51,18 +50,13 @@ func create_new_image():
 	img_storage.lock()
 	update()
 
-var item_goes_brr : Vector2
 #----------------------------INPUT-SYSTEM--------------------------------
 func _input(event):
 	if screen_rect.has_point(get_global_mouse_position()) && is_allowed:
 		if event.is_action_pressed("primary"):
 			previous_pos = get_local_mouse_position().round()
-			current_mode.draw(img_storage, previous_pos)
+			G.current_mode.draw(img_storage, previous_pos)
 			update()
-#		elif Input.is_action_pressed("wheel_up"):
-#			position.x -= 10
-#		elif Input.is_action_pressed("wheel_down"):
-#			position.x += 10
 
 #		Make a script so that you can not go beyond the veiwport
 #		food for thought, what would you do when implementing the
@@ -96,12 +90,12 @@ func draw_fill_gap(start : Vector2, end : Vector2) -> void:
 			err += dx
 			y += sy
 			
-		current_mode.draw(img_storage, Vector2(x, y))
+		G.current_mode.draw(img_storage, Vector2(x, y))
 
 
 #----------------------------------Renderer---------------------------
 func _draw():
-	img_texture.create_from_image(img_storage)
+	img_texture.create_from_image(img_storage, 0)
 	draw_texture(img_texture, Vector2.ZERO)
 
 
