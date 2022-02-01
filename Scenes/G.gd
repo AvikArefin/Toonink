@@ -19,8 +19,6 @@ var size : int = 16
 var cross_color := Color.red 
 var opacity : int = 100
 
-#var tex_img : Image
-
 #-------------- brushes and brush rects ---------------------
 var brush_list = []
 
@@ -33,13 +31,12 @@ var brush_dis : Vector2
 #----------------change brush-------------------------------------------
 
 func change_brush(index: int) -> void:
-#	print('change brush')
-	brush = brush_list[index] ####
-	brush_rect = brush.get_used_rect() ####
+	brush = brush_list[index] 
+	brush_rect = brush.get_used_rect() 
 	
 	reinitialize()
 #-------------------mode changer-------------------------
-var mode_no : int setget change_mode
+var mode_no : int
 var current_mode : GDScript = Blend_Brush
 
 enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
@@ -51,6 +48,7 @@ const MODES = {
 }
 
 func change_mode(index: int) -> void:
+	G.mode_no = index
 	current_mode = MODES[index]
 	G.reinitialize()
 

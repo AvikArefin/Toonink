@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=2]
+[gd_scene load_steps=16 format=2]
 
 [ext_resource path="res://Scenes/Position.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/TextureLoader.gd" type="Script" id=2]
@@ -14,14 +14,12 @@
 [ext_resource path="res://Scenes/PaintBrush.gd" type="Script" id=12]
 [ext_resource path="res://assets/themes/theme.tres" type="Theme" id=13]
 [ext_resource path="res://Scenes/Info.gd" type="Script" id=14]
-[ext_resource path="res://Scenes/Main.gd" type="Script" id=15]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/Add.png-dd1974b1d681ab394730e6dd6fa07fe7.stex"
 
 [node name="Main" type="Node"]
-script = ExtResource( 15 )
 
 [node name="System" type="Control" parent="."]
 anchor_right = 1.0
@@ -35,7 +33,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 153.0
 margin_top = 40.0
-margin_right = -2.0
+margin_right = -10.0
 margin_bottom = -41.0
 size_flags_horizontal = 3
 size_flags_vertical = 3

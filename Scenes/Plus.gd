@@ -1,15 +1,15 @@
 extends VBoxContainer
 
-const _cross : PackedScene = preload("res://Scenes/NewCross/cross.tscn")
+const _CROSS : PackedScene = preload("res://Scenes/NewCross/cross.tscn")
 
 func _on_Plus_pressed() -> void:
-	var x := _cross.instance()
+	var x := _CROSS.instance()
 	
 	x.size = G.size
 	x.color = G.cross_color
 	x.opacity = G.opacity
 	x.mode_no = G.mode_no
-	print(G.mode_no) #DELETE
+
 	x.brush = G.brush
 	add_child(x, true)
 	update()

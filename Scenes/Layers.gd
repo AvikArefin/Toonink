@@ -8,7 +8,6 @@ var layers_count : int
 func _ready() -> void:
 	_refresh()
 
-
 func _on_Add_pressed() -> void:
 	_on_LineEdit_text_entered(LINE_EDIT.text)
 

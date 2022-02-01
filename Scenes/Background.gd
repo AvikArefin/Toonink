@@ -58,7 +58,6 @@ func line() -> void:
 	for y in range(0, G.window_size_y, step):
 		for x in [0, G.window_size_x]:
 			multi_dots.append(Vector2(x, y))
-#	print(multi_dots)
 	_graph_no = 1
 	
 
@@ -70,7 +69,6 @@ func grid() -> void:
 	for x in range(0, G.window_size_x, step):
 		for y in [0, G.window_size_y]:
 			multi_dots.append(Vector2(x, y))
-#	print(multi_dots)
 	_graph_no = 1
 	
 
