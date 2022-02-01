@@ -8,7 +8,8 @@ func _on_Plus_pressed() -> void:
 	x.size = G.size
 	x.color = G.cross_color
 	x.opacity = G.opacity
-	x.mode = G.mode
+	x.mode_no = G.mode_no
+	print(G.mode_no) #DELETE
 	x.brush = G.brush
 	add_child(x, true)
 	update()

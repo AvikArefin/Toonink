@@ -18,7 +18,7 @@ var selected_layer : int # It seems there is some issue with it [the focus] goes
 var size : int = 16
 var cross_color := Color.red 
 var opacity : int = 100
-var mode : int setget change_mode
+
 #var tex_img : Image
 
 #-------------- brushes and brush rects ---------------------
@@ -30,8 +30,16 @@ var blit_brush := Image.new()
 var brush_rect : Rect2 
 
 var brush_dis : Vector2
+#----------------change brush-------------------------------------------
 
+func change_brush(index: int) -> void:
+#	print('change brush')
+	brush = brush_list[index] ####
+	brush_rect = brush.get_used_rect() ####
+	
+	reinitialize()
 #-------------------mode changer-------------------------
+var mode_no : int setget change_mode
 var current_mode : GDScript = Blend_Brush
 
 enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
@@ -48,8 +56,7 @@ func change_mode(index: int) -> void:
 
 #----------------Initailizer---------------------------------------
 func reinitialize() -> void:
-	
-	match mode:
+	match mode_no:
 		2:
 			eraser.create(brush.get_width(), brush.get_height(), false, Image.FORMAT_RGBA8)
 		4:
@@ -58,9 +65,8 @@ func reinitialize() -> void:
 		_:
 			pass
 
-#	Check if the size is okay.
+#	Checkes if the size is okay.
 	if size != brush.get_size().x:
-
 		brush.resize(size, size, 3)
 		brush_rect = brush.get_used_rect()
 		eraser.create(size, size, false, Image.FORMAT_RGBA8)

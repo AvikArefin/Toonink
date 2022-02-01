@@ -10,10 +10,17 @@ var line_width : float = 1.0
 var line_radius : float = 1.0
 var line_color : Color = Color.black
 
+var space : int = 50
+
+var tex := ImageTexture.new()
+
 var _graph_no : int = 0
 # 1 = line; 2 = circles; 3 = texture background |
 
 var background := Image.new()
+
+func _ready() -> void:
+	change_background(4)
 
 func change_line_color(color: Color) -> void:
 	line_color = color
@@ -37,6 +44,8 @@ func change_background(index: int) -> void:
 			colored()
 		7:
 			picture()
+			
+#	print(multi_dots)
 	update()
 
 
@@ -53,7 +62,6 @@ func line() -> void:
 	_graph_no = 1
 	
 
-
 func grid() -> void:
 	for y in range(0, G.window_size_y, step):
 		for x in [0, G.window_size_x]:
@@ -68,23 +76,46 @@ func grid() -> void:
 
 
 func box() -> void:
-	for x in range(0, G.window_size_x, 50):
-		for y in range(0, G.window_size_y, 50):
-			multi_dots.append(Vector2(y, x))
+	for y in range(1, G.window_size_y - 1, 50):
+		for x in range(1, G.window_size_x - 1, 50):
+			multi_dots.append(Vector2(x, y))
+		
 	for x in range(0, G.window_size_x, 50):
 		for y in range(0, G.window_size_y, 50):
 			multi_dots.append((Vector2(x, y)))
 	_graph_no = 1
 	
 
-
 func slanted() -> void:
-	for y in range(0, G.window_size_x, step):
-		for x in range(0, G.window_size_y, step):
-			multi_dots.append(Vector2(x, y))
-			multi_dots.append(Vector2(y, x))
-	_graph_no = 1
+	var x :int = 25
+	var y :int = 15
+	var multi_dots_odd : PoolVector2Array = []
+	for j in range(1, y+1):
+		var a : int = 0
+		multi_dots_odd.append(Vector2(a, j))
+		if (j== y):
+			for i in range(a+1, x+1):
+				if (i==x):
+					pass
+				else:
+					multi_dots_odd.append(Vector2(i, j))
 	
+	var multi_dots_even : PoolVector2Array = []
+	for i in range(1, x+1):
+		var a : int = 0
+		multi_dots_even.append(Vector2(i, a))
+		if (i==x):
+			for j in range(a+1, x+1):
+				if (j==y):
+					pass
+				else:
+					multi_dots_even.append(Vector2(i, j))
+	
+	for i in multi_dots_odd.size():
+		multi_dots.append(multi_dots_odd[i]*space)
+		multi_dots.append(multi_dots_even[i]*space)
+	
+	_graph_no = 1
 
 
 func dotted() -> void:
@@ -107,7 +138,7 @@ func picture() -> void:
 	pass
 	
 
-var tex := ImageTexture.new()
+
 func _draw() -> void:
 	match _graph_no:
 		0:

@@ -1,6 +1,6 @@
-[gd_scene load_steps=14 format=2]
+[gd_scene load_steps=17 format=2]
 
-[ext_resource path="res://Scenes/Top.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Position.gd" type="Script" id=1]
 [ext_resource path="res://Scenes/TextureLoader.gd" type="Script" id=2]
 [ext_resource path="res://Scenes/Screen.gd" type="Script" id=3]
 [ext_resource path="res://Scenes/ProjectLoader.gd" type="Script" id=4]
@@ -12,12 +12,16 @@
 [ext_resource path="res://Scenes/TransparentChecker.tscn" type="PackedScene" id=10]
 [ext_resource path="res://Scenes/Mode.gd" type="Script" id=11]
 [ext_resource path="res://Scenes/PaintBrush.gd" type="Script" id=12]
+[ext_resource path="res://assets/themes/theme.tres" type="Theme" id=13]
+[ext_resource path="res://Scenes/Info.gd" type="Script" id=14]
+[ext_resource path="res://Scenes/Main.gd" type="Script" id=15]
 
 [sub_resource type="StreamTexture" id=1]
 flags = 4
 load_path = "res://.import/Add.png-dd1974b1d681ab394730e6dd6fa07fe7.stex"
 
 [node name="Main" type="Node"]
+script = ExtResource( 15 )
 
 [node name="System" type="Control" parent="."]
 anchor_right = 1.0
@@ -29,7 +33,7 @@ __meta__ = {
 [node name="ViewContainer" type="ViewportContainer" parent="System"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 168.0
+margin_left = 153.0
 margin_top = 40.0
 margin_right = -2.0
 margin_bottom = -41.0
@@ -47,6 +51,7 @@ usage = 1
 render_target_update_mode = 3
 
 [node name="TransparentChecker" parent="System/ViewContainer/Viewport" instance=ExtResource( 10 )]
+visible = false
 
 [node name="Background" type="Node2D" parent="System/ViewContainer/Viewport"]
 script = ExtResource( 6 )
@@ -186,13 +191,23 @@ function in the
 $Screen ---- node"
 }
 
-[node name="Info" type="Label" parent="UI"]
+[node name="Position" type="Label" parent="UI/Bar"]
+margin_left = 986.0
+margin_right = 1322.0
+margin_bottom = 23.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Label" parent="UI/Bar"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -336.0
+margin_left = -698.0
+margin_right = -362.0
 margin_bottom = 24.0
 align = 2
-script = ExtResource( 1 )
+script = ExtResource( 14 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -200,6 +215,7 @@ __meta__ = {
 [node name="ProjectLoader" type="FileDialog" parent="UI"]
 margin_right = 315.0
 margin_bottom = 130.0
+theme = ExtResource( 13 )
 popup_exclusive = true
 window_title = "Open a File"
 mode = 0
@@ -210,9 +226,9 @@ current_path = "/mnt/Data/Projects/Godot/"
 script = ExtResource( 4 )
 
 [node name="TextureLoader" type="ItemList" parent="UI"]
-margin_left = 96.0
+margin_left = 79.0
 margin_top = 40.0
-margin_right = 160.0
+margin_right = 143.0
 margin_bottom = 376.0
 rect_clip_content = false
 auto_height = true
@@ -321,7 +337,7 @@ script = ExtResource( 12 )
 [connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
 [connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
 [connection signal="popup_hide" from="UI/ProjectLoader" to="UI/ProjectLoader" method="cross_allowed"]
-[connection signal="item_selected" from="UI/TextureLoader" to="System/ViewContainer/Viewport/Screen" method="change_brush"]
+[connection signal="item_selected" from="UI/TextureLoader" to="UI/TextureLoader" method="change_brush"]
 [connection signal="item_selected" from="UI/Layers" to="UI/Layers" method="_on_Layers_item_selected"]
 [connection signal="pressed" from="UI/Layers/Add" to="UI/Layers" method="_on_Add_pressed"]
 [connection signal="pressed" from="UI/Layers/Remove" to="UI/Layers" method="_on_Remove_pressed"]

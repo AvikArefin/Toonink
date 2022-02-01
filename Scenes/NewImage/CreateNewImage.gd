@@ -1,12 +1,11 @@
 extends ConfirmationDialog
 
 
-onready var SCREEN : Node2D = $"../../System/ViewContainer/Viewport/Screen"
-onready var VIEW : Camera2D = $"../../System/ViewContainer/Viewport/view"
+onready var SCREEN : Node2D = $"../../System/ViewContainer/Viewport/Screen" as Node2D
+onready var VIEW : Camera2D = $"../../System/ViewContainer/Viewport/view" as Camera2D
 
 func _on_New_pressed() -> void:
 	SCREEN.is_allowed = false
-	
 	popup()
 
 
@@ -207,10 +206,3 @@ func switch_width_height() -> void:
 
 	width_value.connect("value_changed", self, "_on_SizeValue_value_changed")
 	height_value.connect("value_changed", self, "_on_SizeValue_value_changed")
-
-
-
-
-
-
-

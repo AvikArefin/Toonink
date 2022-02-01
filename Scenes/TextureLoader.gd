@@ -42,3 +42,6 @@ func _loader(_name_of_brush: String):
 	
 # load is being deprecated in 4.0? what should i use then?
 
+
+func change_brush(index: int) -> void:
+	G.change_brush(index)

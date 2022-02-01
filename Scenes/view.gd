@@ -1,5 +1,8 @@
 extends Camera2D
 
+const zoom_max := 4.0
+const zoom_min := 0.05
+
 var zoom_step := 1.1
 var zoom_x : float
 
@@ -13,9 +16,6 @@ func _input(event) -> void:
 				else :
 					if event.button_index == BUTTON_WHEEL_UP:
 						zoom_at_point(1/zoom_step, mouse_position)
-
-const zoom_max := 4.0
-const zoom_min := 0.05
 
 func zoom_at_point(zoom_change, point) -> void:
 	var c0 = global_position # camera position
@@ -35,19 +35,17 @@ func zoom_at_point(zoom_change, point) -> void:
 		global_position = c1
 		G.zoom_lv = str(round(100/zoom_x))
 
-
 func reset_zoom() -> void:
 	print("reset_zoom")
 	zoom = Vector2.ONE
 	G.zoom_lv = "100"
 	global_position = Vector2.ZERO
 
-
 #		Make a script so that you can not go beyond the veiwport
 #		food for thought, what would you do when implementing the
 #		zoom mechanic?
 
-onready var TRANSPARENT_CHECKER: ColorRect = $"../TransparentChecker" #as ColorRect
+#onready var TRANSPARENT_CHECKER: ColorRect = $"../TransparentChecker" #as ColorRect
 
 func update_transparent_checker_offset() -> void: # update name to bg
 #	var o := get_global_transform_with_canvas().get_origin()

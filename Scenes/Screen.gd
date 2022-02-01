@@ -8,36 +8,8 @@ var final_pos : Vector2
 
 var img_storage : Image
 var img_texture : ImageTexture = ImageTexture.new()
-#--------------------------------------------------------------------------
-#var current_mode : GDScript = Blend_Brush
-#
-##------Use of class for the sake of not having to check the tool all the time--------
-#enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
-#const MODES = {
-#	Modes.BRUSH : Blend_Brush,
-#	Modes.ERASER : Eraser,
-#	Modes.PIXEL : Pixel,
-#	Modes.BLIT_BRUSH : Blit_Brush
-#}
-#
-#
-#func change_mode(index: int) -> void:
-#	G.mode = index
-#	img_storage.lock()  # why does the image get unlocked in the middle of nowhere
-#	current_mode = MODES[G.mode]
-#
-#	G.reinitialize()
-	
 
-	
-#----------------change brush-------------------------------------------
 
-func change_brush(index: int) -> void:
-	print('change brush')
-	G.brush = G.brush_list[index] ####
-	G.brush_rect = G.brush.get_used_rect() ####
-	
-	G.reinitialize()
 #-----------------------------------------------------------------------
 
 func _ready() -> void:
@@ -58,9 +30,6 @@ func _input(event):
 			G.current_mode.draw(img_storage, previous_pos)
 			update()
 
-#		Make a script so that you can not go beyond the veiwport
-#		food for thought, what would you do when implementing the
-#		zoom mechanic?
 
 		if event is InputEventMouseMotion:
 			if Input.is_action_pressed("primary"):
@@ -115,11 +84,11 @@ func color_dropper_toggle_is_allowed() -> void:
 #		change the background color now..
 		Background.update()
 
+		
 func _on_size_value_changed(value: float) -> void:
 	G.size = int(value)
-	
 	G.reinitialize()
-	
+	print(is_allowed)
 
 func change_color(color: Color) -> void:
 	G.cross_color = color
