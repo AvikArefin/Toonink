@@ -1,0 +1,13 @@
+[remap]
+
+importer="image"
+type="Image"
+path="res://.import/angle64.png-def88b577252a43c740f1ee9e49e256e.image"
+
+[deps]
+
+source_file="res://assets/brushes/angle64.png"
+dest_files=[ "res://.import/angle64.png-def88b577252a43c740f1ee9e49e256e.image" ]
+
+[params]
+

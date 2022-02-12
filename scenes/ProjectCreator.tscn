@@ -1,0 +1,118 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/ProjectCreator.gd" type="Script" id=1]
+[ext_resource path="res://assets/icons/landscape.png" type="Texture" id=2]
+[ext_resource path="res://assets/icons/portrait.png" type="Texture" id=3]
+
+[node name="ProjectCreator" type="ConfirmationDialog"]
+visible = true
+margin_right = 328.0
+margin_bottom = 128.0
+size_flags_horizontal = 13
+size_flags_vertical = 13
+popup_exclusive = true
+window_title = "Project Creator"
+resizable = true
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBC" type="VBoxContainer" parent="."]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 320.0
+margin_bottom = 89.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ProjectName" type="HBoxContainer" parent="VBC"]
+margin_right = 312.0
+margin_bottom = 23.0
+
+[node name="NameLabel" type="Label" parent="VBC/ProjectName"]
+margin_right = 85.0
+margin_bottom = 23.0
+text = "Project Name:"
+
+[node name="NameInput" type="LineEdit" parent="VBC/ProjectName"]
+margin_left = 89.0
+margin_right = 312.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+placeholder_text = "Enter name... "
+
+[node name="ProjectPresets" type="HBoxContainer" parent="VBC"]
+margin_top = 27.0
+margin_right = 312.0
+margin_bottom = 51.0
+
+[node name="Presets" type="Label" parent="VBC/ProjectPresets"]
+margin_right = 111.0
+margin_bottom = 23.0
+text = "Image size presets:"
+
+[node name="PresetOptions" type="OptionButton" parent="VBC/ProjectPresets"]
+margin_left = 115.0
+margin_right = 201.0
+margin_bottom = 24.0
+size_flags_horizontal = 3
+
+[node name="PresetMode" type="OptionButton" parent="VBC/ProjectPresets"]
+margin_left = 205.0
+margin_right = 312.0
+margin_bottom = 24.0
+text = "Landscape"
+icon = ExtResource( 2 )
+items = [ "Landscape", ExtResource( 2 ), false, 0, null, "Potrait", ExtResource( 3 ), false, 1, null ]
+selected = 0
+
+[node name="ManualSize" type="HBoxContainer" parent="VBC"]
+margin_top = 55.0
+margin_right = 312.0
+margin_bottom = 78.0
+size_flags_horizontal = 3
+alignment = 1
+
+[node name="size_x" type="HBoxContainer" parent="VBC/ManualSize"]
+margin_left = 69.0
+margin_right = 154.0
+margin_bottom = 23.0
+
+[node name="label" type="Label" parent="VBC/ManualSize/size_x"]
+margin_right = 17.0
+margin_bottom = 23.0
+text = "x:"
+
+[node name="value" type="SpinBox" parent="VBC/ManualSize/size_x"]
+margin_left = 21.0
+margin_right = 85.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10000.0
+value = 1.0
+
+[node name="size_y" type="HBoxContainer" parent="VBC/ManualSize"]
+margin_left = 158.0
+margin_right = 243.0
+margin_bottom = 23.0
+
+[node name="label" type="Label" parent="VBC/ManualSize/size_y"]
+margin_right = 17.0
+margin_bottom = 23.0
+text = "y:"
+
+[node name="value" type="SpinBox" parent="VBC/ManualSize/size_y"]
+margin_left = 21.0
+margin_right = 85.0
+margin_bottom = 23.0
+size_flags_horizontal = 3
+min_value = 1.0
+max_value = 10000.0
+value = 1.0
+
+[connection signal="confirmed" from="." to="." method="_on_ProjectCreator_confirmed"]
+[connection signal="item_selected" from="VBC/ProjectPresets/PresetOptions" to="." method="_on_PresetOptions_item_selected"]
+[connection signal="item_selected" from="VBC/ProjectPresets/PresetMode" to="." method="_on_PresetMode_item_selected"]

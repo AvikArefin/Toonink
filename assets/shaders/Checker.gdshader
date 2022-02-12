@@ -1,4 +1,5 @@
 shader_type canvas_item;
+render_mode unshaded;
 
 uniform float cell_size = 16;
 uniform float cell_spacing = 2;
@@ -15,5 +16,5 @@ void fragment() {
 	float step_size = cell_size + cell_spacing;
 	float ratio = cell_spacing / step_size;
 	// Grid
-	if (fract(v.x / step_size) < ratio || fract(v.y / step_size) < ratio) COLOR = line_color;
+	if (fract(v.x / step_size) < ratio|| fract(v.y / step_size) < ratio) COLOR = line_color;
 }

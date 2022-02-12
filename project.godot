@@ -12,22 +12,22 @@ _global_script_classes=[ {
 "base": "Object",
 "class": "Blend_Brush",
 "language": "GDScript",
-"path": "res://Scenes/oop/Blend_Brush.gd"
+"path": "res://scenes/oop/Blend_Brush.gd"
 }, {
 "base": "Object",
 "class": "Blit_Brush",
 "language": "GDScript",
-"path": "res://Scenes/oop/Blit_Brush.gd"
+"path": "res://scenes/oop/Blit_Brush.gd"
 }, {
 "base": "Object",
 "class": "Eraser",
 "language": "GDScript",
-"path": "res://Scenes/oop/Eraser.gd"
+"path": "res://scenes/oop/Eraser.gd"
 }, {
 "base": "Object",
 "class": "Pixel",
 "language": "GDScript",
-"path": "res://Scenes/oop/Pixel.gd"
+"path": "res://scenes/oop/Pixel.gd"
 } ]
 _global_script_class_icons={
 "Blend_Brush": "",
@@ -39,7 +39,7 @@ _global_script_class_icons={
 [application]
 
 config/name="Toonink"
-run/main_scene="res://Scenes/Main.tscn"
+run/main_scene="res://scenes/Main.tscn"
 boot_splash/image="res://2export/Alternate_icon.png"
 boot_splash/fullsize=false
 boot_splash/use_filter=false
@@ -48,7 +48,7 @@ config/icon="res://2export/Alternate_icon.png"
 
 [autoload]
 
-G="*res://Scenes/G.gd"
+G="*res://scenes/G.gd"
 
 [display]
 
