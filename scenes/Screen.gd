@@ -66,6 +66,9 @@ func fill_in_the_gap(start : Vector2, end : Vector2) -> void:
 			
 		G.current_mode.draw(img_storage, Vector2(x, y))
 
+# TODO 
+# Optimizations: The drawing gets slower when the drawing screen too large.
+# Enhancements: When drawing faster the lines becomes robotic.
 
 #------------------------------- Renderer -------------------------------------
 func _draw():
@@ -78,7 +81,6 @@ func change_color(color: Color) -> void:
 
 func _on_BgColorDroper_color_changed(color: Color) -> void:
 	G.bg_color = color
-# TODO this is not used yet...
 
 #---------------------------- Control SYSTEM ----------------------------------
 
@@ -119,7 +121,7 @@ func create_mode(extra_arg_0: int) -> void:
 
 	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_STOP
 	match extra_arg_0:
-#	fix of the unwanted drawing... # TODO write an if statement to check which hide function was executed.
+#	fix of the unwanted drawing... 
 		0:
 			print('about popup hide')
 		1:
@@ -138,7 +140,3 @@ func create_mode(extra_arg_0: int) -> void:
 			previous_pos = get_local_mouse_position()
 		7:
 			print("Project Creator ???")
-		
-#			TODO Change the color of the shader primary color in the shaders
-
-# BUG TODO you have to load a picture twice to be able to draw on it... why?

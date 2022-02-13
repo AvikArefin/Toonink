@@ -52,8 +52,6 @@ func update_transparent_checker_offset() -> void: # update name to bg
 	pass
 # update_transparent_checker_offset() ------> update_bg_offset()
 
-# TODO make Zoom lv be able to directly change the zoom level
-
 
 func _on_Zoom_lv_value_changed(value: float) -> void:
 	zoom = Vector2(100 / value, 100 /value)

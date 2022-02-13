@@ -7,6 +7,9 @@ uniform vec2 number = vec2(10.0, 10.0);
 
 uniform float progress : hint_range(0, 1) = 0.42;
 uniform float diamondPixelSize = 10f;
+uniform vec3 color_rgb = vec3(0.0);
+uniform float color_alpha = 0.0;
+
 
 
 void fragment() {
@@ -17,9 +20,9 @@ void fragment() {
     highp float yDistance = abs(yFraction - 0.5);
     
     if (xDistance + yDistance > progress * 2f) {
-        COLOR.rgb = vec3(0.0);
+        COLOR.rgb = color_rgb;
     }
 	else {
-		COLOR.a = 0.0;
+		COLOR.a = color_alpha;
 	}
 }

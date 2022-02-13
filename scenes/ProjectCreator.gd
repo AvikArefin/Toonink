@@ -64,6 +64,10 @@ var templates := [
 	Template.new(320, 200, "C64"),
 	# Sinclair
 	Template.new(256, 192, "ZX Spectrum"),
+	# PC
+	Template.new(1920, 1080),
+	Template.new(3840, 2160),
+	Template.new(7680, 4320),
 ]
 
 
@@ -132,8 +136,7 @@ func _on_ProjectCreator_confirmed() -> void:
 	G.stored_img_y = SCREEN.img_storage.get_size().y
 	SCREEN.update_screen_rect()
 	RESOLUTION.update_info()
-#	reactivatie the screen and textedit
-#	SCREEN.create_mode(7) # DELETE the signal does the job better
+
 	VIEW.reset_zoom()
 
 

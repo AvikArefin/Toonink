@@ -28,8 +28,6 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 		G.stored_img_y = SCREEN.img_storage.get_size().y
 		SCREEN.update_screen_rect()
 		RESOLUTION.update_info()
-#		reactivatie the screen and textedit
-#		SCREEN.create_mode(3) # DELETE the signal does the job better
 
 		VIEW.reset_zoom()
 
@@ -41,12 +39,9 @@ func save_confirmed() -> void:
 		var file := File.new()
 		var new_file_path : String = current_path.trim_suffix('.' + current_path.get_extension()) + '.txt'
 		var _err := file.open(new_file_path, File.WRITE)
-
 		file.store_string(text_content)
 		file.close()
-#		reactivatie the screen and textedit
-#		SCREEN.create_mode(3)
-		
+
 # TODO: make sure that the texts are saved as txt files (with markdown and/ or bbcode) support
 # TODO: Offer to integrating the texts as part of the "drawing"
 
