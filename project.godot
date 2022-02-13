@@ -8,34 +8,6 @@
 
 config_version=4
 
-_global_script_classes=[ {
-"base": "Object",
-"class": "Blend_Brush",
-"language": "GDScript",
-"path": "res://scenes/oop/Blend_Brush.gd"
-}, {
-"base": "Object",
-"class": "Blit_Brush",
-"language": "GDScript",
-"path": "res://scenes/oop/Blit_Brush.gd"
-}, {
-"base": "Object",
-"class": "Eraser",
-"language": "GDScript",
-"path": "res://scenes/oop/Eraser.gd"
-}, {
-"base": "Object",
-"class": "Pixel",
-"language": "GDScript",
-"path": "res://scenes/oop/Pixel.gd"
-} ]
-_global_script_class_icons={
-"Blend_Brush": "",
-"Blit_Brush": "",
-"Eraser": "",
-"Pixel": ""
-}
-
 [application]
 
 config/name="Toonink"

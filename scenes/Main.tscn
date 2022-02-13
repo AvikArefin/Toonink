@@ -30,14 +30,14 @@ shader = ExtResource( 6 )
 [sub_resource type="GDScript" id=3]
 script/source = "extends ColorRect
 
-onready var VIEW : Viewport = $\"..\"
+#onready var VIEW : Viewport = $\"..\"
 
 func _ready() -> void:
-	update_rect()
+#	update_rect() # DELETE
 	_selected_shader(6)
 
-func update_rect() -> void:
-	rect_size = VIEW.get_size()
+#func update_rect() -> void:
+#	rect_size = VIEW.get_size()
 
 const shader0 := preload(\"res://assets/shaders/Checker.gdshader\")
 const shader1 := preload(\"res://assets/shaders/Dots.gdshader\")
@@ -146,8 +146,8 @@ __meta__ = {
 }
 
 [node name="About" type="Button" parent="UI/Bar"]
-margin_left = 536.0
-margin_right = 592.0
+margin_left = 712.0
+margin_right = 768.0
 margin_bottom = 23.0
 text = "ABOUT"
 __meta__ = {
@@ -155,8 +155,8 @@ __meta__ = {
 }
 
 [node name="Settings" type="Button" parent="UI/Bar"]
-margin_left = 600.0
-margin_right = 667.0
+margin_left = 776.0
+margin_right = 843.0
 margin_bottom = 23.0
 text = "SETTINGS"
 __meta__ = {
@@ -201,9 +201,9 @@ __meta__ = {
 [node name="ColorDroper" type="ColorPickerButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 360.0
+margin_left = 383.0
 margin_top = -24.0
-margin_right = 384.0
+margin_right = 407.0
 toggle_mode = false
 flat = true
 __meta__ = {
@@ -228,24 +228,32 @@ __meta__ = {
 "_edit_use_anchors_": true
 }
 
+[node name="SizeTag" type="Label" parent="UI/Bar"]
+margin_left = 272.0
+margin_right = 305.0
+margin_bottom = 23.0
+text = "Size:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="size" type="SpinBox" parent="UI/Bar"]
-margin_left = 280.0
-margin_right = 360.0
+margin_left = 304.0
+margin_right = 368.0
 margin_bottom = 23.0
 min_value = 1.0
 max_value = 64.0
 value = 9.0
 align = 1
-prefix = "Size:"
-suffix = "px"
 script = ExtResource( 21 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ShaderButton" type="OptionButton" parent="UI/Bar"]
-margin_left = 392.0
-margin_right = 480.0
+margin_left = 415.0
+margin_right = 503.0
 margin_bottom = 23.0
 hint_tooltip = "Background"
 text = "None"
@@ -258,9 +266,9 @@ __meta__ = {
 [node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bar"]
 anchor_top = 1.0
 anchor_bottom = 1.0
-margin_left = 488.0
+margin_left = 504.0
 margin_top = -24.0
-margin_right = 518.0
+margin_right = 534.0
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -270,36 +278,48 @@ function in the
 $Screen ---- node"
 }
 
+[node name="ZoomTag" type="Label" parent="UI/Bar"]
+margin_left = 549.0
+margin_right = 592.0
+margin_bottom = 23.0
+text = "Zoom:"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="Zoom_lv" type="SpinBox" parent="UI/Bar"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -618.0
-margin_right = -554.0
+margin_left = -730.0
+margin_right = -666.0
 margin_bottom = 23.0
 min_value = 26.0
 max_value = 1919.0
 value = 100.0
 
-[node name="Position" type="Label" parent="UI/Bar"]
+[node name="ResTag" type="Label" parent="UI/Bar"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -336.0
-margin_bottom = 23.0
-script = ExtResource( 11 )
+margin_left = -218.0
+margin_right = -90.0
+margin_bottom = 24.0
+text = "- [ x ] - px"
+align = 2
+script = ExtResource( 10 )
 __meta__ = {
-"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
-[node name="Resolution" type="Label" parent="UI/Bar"]
+[node name="PositionTag" type="Label" parent="UI/Bar"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -490.0
-margin_right = -362.0
+margin_left = -90.0
+margin_right = -2.0
 margin_bottom = 24.0
-text = "- [ x ] -"
+size_flags_horizontal = 5
 align = 1
-script = ExtResource( 10 )
+script = ExtResource( 11 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -402,6 +422,7 @@ margin_left = 16.0
 margin_top = -64.0
 margin_right = 224.0
 margin_bottom = -40.0
+placeholder_text = "New Layer Name"
 __meta__ = {
 "_edit_use_anchors_": false
 }

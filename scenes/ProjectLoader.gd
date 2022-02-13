@@ -3,7 +3,7 @@ extends FileDialog
 onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" as Node2D
 onready var VIEW := $"../../System/ViewContainer/Viewport/view" as Camera2D
 onready var TEXTPORT := $"../../System/ViewContainer/Viewport/TextPort" as TextEdit
-onready var RESOLUTION := $"../Bar/Resolution" as Label
+onready var RESOLUTION := $"../Bar/ResTag" as Label
 
 func _projectloader(index : int) -> void:
 	match index:
@@ -21,7 +21,7 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 		SCREEN.img_storage = Image.new()
 		SCREEN.img_storage.load(path)
 		SCREEN.img_storage.convert(Image.FORMAT_RGBA8)
-		SCREEN.img_storage.lock()
+		SCREEN.img_storage.lock() # 4.0 deprecated
 		SCREEN.update()
 #		Recalculate the screen rect, based on the loaded pic, that is being used as a boundry for the input i.e. cross to draw in.
 		G.stored_img_x = SCREEN.img_storage.get_size().x

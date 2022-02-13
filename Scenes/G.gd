@@ -1,13 +1,9 @@
 extends Node
 
 const TEST_POPUP_AREA := Vector2(500, 300)
-onready var window_size_x : int = int(OS.get_window_safe_area().size.x)
-onready var window_size_y : int = int(OS.get_window_safe_area().size.y)
 
-func refresh_window_size() -> void:
-	window_size_x = int(OS.get_window_safe_area().size.x)
-	window_size_y = int(OS.get_window_safe_area().size.y)
-
+const window_size_x : int = 1322
+const window_size_y : int = 753
 
 var zoom_able : bool = true
 
@@ -45,14 +41,29 @@ func change_brush(index: int) -> void:
 	reinitialize()
 #-------------------mode changer-------------------------
 var mode_no : int
-var current_mode : GDScript = Blend_Brush
+var current_mode : GDScript = xBlend_Brush
 
-enum Modes { BRUSH = 0, ERASER = 1, PIXEL = 2, BLIT_BRUSH = 3}
-const MODES = {
-	Modes.BRUSH : Blend_Brush,
-	Modes.ERASER : Eraser,
-	Modes.PIXEL : Pixel,
-	Modes.BLIT_BRUSH : Blit_Brush
+class xBlend_Brush:
+	static func draw(img_storage : Image, pos: Vector2) -> void:
+		img_storage.blend_rect(G.brush, G.brush_rect, pos - G.brush_dis)
+		
+class xEraser:
+	static func draw(img_storage: Image, pos: Vector2) -> void:
+		img_storage.blit_rect_mask(G.eraser, G.brush, G.brush_rect, pos - G.brush_dis)
+
+class xPixel:
+	static func draw(img_storage: Image, pos: Vector2) -> void:
+		img_storage.set_pixelv(pos, G.cross_color)
+
+class xBlit_Brush:
+	static func draw(img_storage: Image, pos: Vector2) -> void:
+		img_storage.blit_rect_mask(G.blit_brush, G.brush, G.brush_rect, pos - G.brush_dis)
+
+var MODES := {
+	0 : xBlend_Brush,
+	1 : xEraser,
+	2 : xPixel,
+	3 : xBlit_Brush
 }
 
 func change_mode(index: int) -> void:

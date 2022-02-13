@@ -122,14 +122,14 @@ func _on_PresetMode_item_selected(_index: int) -> void:
 		
 
 onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" as Node2D
-onready var RESOLUTION := $"../Bar/Resolution" as Label
+onready var RESOLUTION := $"../Bar/ResTag" as Label
 onready var VIEW := $"../../System/ViewContainer/Viewport/view" as Camera2D
 
 func _on_ProjectCreator_confirmed() -> void:
 	print("ProjectCreator at flaut here.")
 	SCREEN.img_storage = Image.new()
 	SCREEN.img_storage.create(VALUE_X.value, VALUE_Y.value, false, Image.FORMAT_RGBA8)
-	SCREEN.img_storage.lock()
+	SCREEN.img_storage.lock() # 4.0 deprecated
 	SCREEN.update()
 #	Recalculate the screen rect, based on the loaded pic, that is being used as a boundry for the input i.e. cross to draw in.
 	G.stored_img_x = SCREEN.img_storage.get_size().x

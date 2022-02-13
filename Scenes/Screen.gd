@@ -23,7 +23,7 @@ func create_new_image():
 	var img := Image.new()
 	img.create(G.window_size_x, G.window_size_y, true, Image.FORMAT_RGBA8)
 	img_storage = img
-	img_storage.lock()
+	img_storage.lock() # 4.0 deprecated
 	update()
 
 #---------------------------- INPUT-SYSTEM ------------------------------------
