@@ -5,9 +5,8 @@
 [ext_resource path="res://assets/icons/portrait.png" type="Texture" id=3]
 
 [node name="ProjectCreator" type="ConfirmationDialog"]
-visible = true
-margin_right = 328.0
-margin_bottom = 128.0
+margin_right = 400.0
+margin_bottom = 160.0
 size_flags_horizontal = 13
 size_flags_vertical = 13
 popup_exclusive = true
@@ -21,14 +20,14 @@ __meta__ = {
 [node name="VBC" type="VBoxContainer" parent="."]
 margin_left = 8.0
 margin_top = 8.0
-margin_right = 320.0
-margin_bottom = 89.0
+margin_right = 392.0
+margin_bottom = 121.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ProjectName" type="HBoxContainer" parent="VBC"]
-margin_right = 312.0
+margin_right = 384.0
 margin_bottom = 23.0
 
 [node name="NameLabel" type="Label" parent="VBC/ProjectName"]
@@ -38,15 +37,33 @@ text = "Project Name:"
 
 [node name="NameInput" type="LineEdit" parent="VBC/ProjectName"]
 margin_left = 89.0
-margin_right = 312.0
+margin_right = 384.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 placeholder_text = "Enter name... "
 
-[node name="ProjectPresets" type="HBoxContainer" parent="VBC"]
+[node name="TextType" type="HBoxContainer" parent="VBC"]
 margin_top = 27.0
-margin_right = 312.0
-margin_bottom = 51.0
+margin_right = 384.0
+margin_bottom = 50.0
+
+[node name="Label" type="Label" parent="VBC/TextType"]
+margin_right = 85.0
+margin_bottom = 23.0
+text = "Text File Type:"
+
+[node name="OptionButton" type="OptionButton" parent="VBC/TextType"]
+margin_left = 89.0
+margin_right = 171.0
+margin_bottom = 23.0
+text = "TeXT [.txt]"
+items = [ "TeXT [.txt]", null, false, 0, null, "MarkDown [.md]", null, false, 1, null, "BBCode", null, false, 2, null ]
+selected = 0
+
+[node name="ProjectPresets" type="HBoxContainer" parent="VBC"]
+margin_top = 54.0
+margin_right = 384.0
+margin_bottom = 78.0
 
 [node name="Presets" type="Label" parent="VBC/ProjectPresets"]
 margin_right = 111.0
@@ -55,13 +72,13 @@ text = "Image size presets:"
 
 [node name="PresetOptions" type="OptionButton" parent="VBC/ProjectPresets"]
 margin_left = 115.0
-margin_right = 201.0
+margin_right = 273.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="PresetMode" type="OptionButton" parent="VBC/ProjectPresets"]
-margin_left = 205.0
-margin_right = 312.0
+margin_left = 277.0
+margin_right = 384.0
 margin_bottom = 24.0
 text = "Landscape"
 icon = ExtResource( 2 )
@@ -69,15 +86,15 @@ items = [ "Landscape", ExtResource( 2 ), false, 0, null, "Potrait", ExtResource(
 selected = 0
 
 [node name="ManualSize" type="HBoxContainer" parent="VBC"]
-margin_top = 55.0
-margin_right = 312.0
-margin_bottom = 78.0
+margin_top = 82.0
+margin_right = 384.0
+margin_bottom = 105.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="size_x" type="HBoxContainer" parent="VBC/ManualSize"]
-margin_left = 69.0
-margin_right = 154.0
+margin_left = 105.0
+margin_right = 190.0
 margin_bottom = 23.0
 
 [node name="label" type="Label" parent="VBC/ManualSize/size_x"]
@@ -95,8 +112,8 @@ max_value = 10000.0
 value = 1.0
 
 [node name="size_y" type="HBoxContainer" parent="VBC/ManualSize"]
-margin_left = 158.0
-margin_right = 243.0
+margin_left = 194.0
+margin_right = 279.0
 margin_bottom = 23.0
 
 [node name="label" type="Label" parent="VBC/ManualSize/size_y"]
@@ -114,5 +131,6 @@ max_value = 10000.0
 value = 1.0
 
 [connection signal="confirmed" from="." to="." method="_on_ProjectCreator_confirmed"]
+[connection signal="item_selected" from="VBC/TextType/OptionButton" to="." method="_on_OptionButton_item_selected"]
 [connection signal="item_selected" from="VBC/ProjectPresets/PresetOptions" to="." method="_on_PresetOptions_item_selected"]
 [connection signal="item_selected" from="VBC/ProjectPresets/PresetMode" to="." method="_on_PresetMode_item_selected"]

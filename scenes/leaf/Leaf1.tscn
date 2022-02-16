@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://assets/library/stickers/1441A0E1-C89F-42FC-8EE0-5476F19F907E.png" type="Texture" id=1]
+[ext_resource path="res://scenes/leaf/Leaf1.gd" type="Script" id=2]
+
+[node name="Leaf1" type="TextureRect"]
+margin_right = 450.0
+margin_bottom = 628.0
+texture = ExtResource( 1 )
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}

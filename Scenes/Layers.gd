@@ -22,7 +22,9 @@ func _on_LineEdit_text_entered(new_text: String) -> void:
 
 func _on_Remove_pressed() -> void:
 	VIEW_PORT.get_child(G.selected_layer).queue_free()
-	yield(get_tree(), "idle_frame") # The "removing" and "refreshing" are happening at the same time as they 
+	yield(get_tree(), "idle_frame")
+#	await get_tree().process_frame # 4.0 version
+	 # The "removing" and "refreshing" are happening at the same time as they 
 	_refresh() #  are triggered without delay after pressing remove, it won't work. That is why yield is being used.
 	
 func _on_Layers_item_selected(index: int) -> void:

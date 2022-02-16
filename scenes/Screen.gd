@@ -1,4 +1,5 @@
-extends Node2D
+#extends Node2D
+extends TextureRect
 
 onready var SCREEN_RECT : Rect2 = get_viewport_rect()
 
@@ -18,23 +19,29 @@ var img_texture : ImageTexture = ImageTexture.new()
 func _ready() -> void:
 	create_new_image()
 
-
-func create_new_image():
+func create_new_image() -> void:
 	var img := Image.new()
-	img.create(G.window_size_x, G.window_size_y, true, Image.FORMAT_RGBA8)
+	img.create(G.stored_img_x, G.stored_img_y, false, Image.FORMAT_RGBA8)
 	img_storage = img
 	img_storage.lock() # 4.0 deprecated
 	update()
+#	update_screen_texture()
+
+func clear_image() -> void:
+	img_texture = ImageTexture.new()
+	img_texture.create(G.stored_img_x, G.stored_img_y, Image.FORMAT_RGBA8, 0)
+	texture = img_texture
 
 #---------------------------- INPUT-SYSTEM ------------------------------------
-func _input(event):
+func _input(event: InputEvent) -> void:
 	if SCREEN_RECT.has_point(get_global_mouse_position()) && is_allowed:
 #		print(screen_rect)
 		if event.is_action_pressed("primary"):
 			previous_pos = get_local_mouse_position().round()
 			G.current_mode.draw(img_storage, previous_pos)
-			update()
+			update_screen_texture()
 
+# Is there a way to reduce the time img_storage is sent as a variable?
 
 		if event is InputEventMouseMotion:
 			if Input.is_action_pressed("primary"):
@@ -43,7 +50,7 @@ func _input(event):
 				fill_in_the_gap(previous_pos, final_pos)
 #				current_mode.draw(img_storage, previous_pos)
 				previous_pos = final_pos
-				update()
+				update_screen_texture()
 
 
 func fill_in_the_gap(start : Vector2, end : Vector2) -> void:
@@ -70,42 +77,57 @@ func fill_in_the_gap(start : Vector2, end : Vector2) -> void:
 # Optimizations: The drawing gets slower when the drawing screen too large.
 # Enhancements: When drawing faster the lines becomes robotic.
 
-#------------------------------- Renderer -------------------------------------
-func _draw():
-	img_texture.create_from_image(img_storage, 0)
-	draw_texture(img_texture, Vector2.ZERO)
+#-------------------------------Final Renderer -------------------------------------
+func update_screen_texture() -> void:				#
+	img_texture.create_from_image(img_storage, 0)	# When the Screen is TextureRect
+	texture = img_texture							#
 
 #------------------------------------------------------------------------------
-func change_color(color: Color) -> void:
+
+func _on_FgColor_color_changed(color: Color) -> void:
 	G.cross_color = color
 
-func _on_BgColorDroper_color_changed(color: Color) -> void:
+func _on_BgColor_color_changed(color: Color) -> void:
 	G.bg_color = color
 
 #---------------------------- Control SYSTEM ----------------------------------
 
 onready var TEXTPORT : TextEdit = $"../TextPort" as TextEdit
 
+var time_first := OS.get_unix_time()
+var time_second := OS.get_unix_time()
+var time_elapsed := OS.get_unix_time()
+
 func configure_mode(extra_arg_0: int) -> void:
-	is_allowed = false
-	G.zoom_able = false
+	get_tree().paused = true
+#	is_allowed = false
+#	G.zoom_able = false
 	
-	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_IGNORE
-	match extra_arg_0:
-		0:
-			print('about popup about to show')
-		1:
-			print("ColorDropper pressed")
-		2:
-			print("mode pressed")
-		3:
-			print("projectloader popup about to show up")
-		4:
-			print("ShaderButton pressed")
-		5:
-			print("BgColorDropper pressed")
-		7:
-			print("Project Creator about to show")
+#	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_IGNORE
+#	TEXTPORT.pause_mode = Node.PAUSE_MODE_STOP	
+
+	time_first = OS.get_ticks_usec()
+	ifatch(extra_arg_0)
+	time_second = OS.get_ticks_usec()
+	time_elapsed = time_second - time_first
+	print_debug(time_elapsed)
+	
+
+func ifatch(arg : int) -> void:
+	if arg == 0:
+		print_debug('about popup about to show')
+	elif arg == 1:
+		print_debug("ColorDropper pressed")
+	elif arg == 2:
+		print_debug("mode pressed")
+	elif arg == 3:
+		print_debug("projectloader popup about to show up")
+	elif arg == 4:
+		print_debug("ShaderButton pressed")
+	elif arg == 5:
+		print_debug("BgColorDropper pressed")
+	elif arg == 7:
+		print_debug("Project Creator about to show")
 
 
 func _on_Mode_item_selected(_index: int, extra_arg_0: int) -> void:
@@ -116,10 +138,12 @@ func _on_ShaderButton_item_selected(_index: int, extra_arg_0: int) -> void:
 
 
 func create_mode(extra_arg_0: int) -> void:
-	is_allowed = true
-	G.zoom_able = true
+	get_tree().paused = false
+#	is_allowed = true
+#	G.zoom_able = true
 
-	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_STOP
+
+#	print(extra_arg_0)
 	match extra_arg_0:
 #	fix of the unwanted drawing... 
 		0:
@@ -139,4 +163,8 @@ func create_mode(extra_arg_0: int) -> void:
 			print("BgColorDropper popup closed")
 			previous_pos = get_local_mouse_position()
 		7:
-			print("Project Creator ???")
+			print("Project Creator hide popup")
+
+
+
+

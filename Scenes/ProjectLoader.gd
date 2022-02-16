@@ -1,6 +1,6 @@
 extends FileDialog
 
-onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" as Node2D
+onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" #as Node2D
 onready var VIEW := $"../../System/ViewContainer/Viewport/view" as Camera2D
 onready var TEXTPORT := $"../../System/ViewContainer/Viewport/TextPort" as TextEdit
 onready var RESOLUTION := $"../Bar/ResTag" as Label
@@ -30,6 +30,15 @@ func _on_ProjectLoader_file_selected(path: String) -> void:
 		RESOLUTION.update_info()
 
 		VIEW.reset_zoom()
+		
+#		support for text
+		var file := File.new()
+		var new_file_path : String = current_path.trim_suffix('.' + current_path.get_extension()) + G.text_file_type
+#		TODO do something about this line above..
+		if file.file_exists(new_file_path): # need to work on the variable
+			var _err = file.open(new_file_path, File.READ)
+			TEXTPORT.text = file.get_as_text()
+			file.close()
 
 func save_confirmed() -> void:
 	if mode == MODE_SAVE_FILE:

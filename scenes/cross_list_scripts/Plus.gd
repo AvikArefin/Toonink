@@ -1,6 +1,6 @@
 extends TextureButton
 
-const _CROSS : PackedScene = preload("res://Scenes/NewCross/cross.tscn")
+const _CROSS : PackedScene = preload("res://scenes/NewCross/cross.tscn")
 onready var CROSSLIST := $".."
 
 

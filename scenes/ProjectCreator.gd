@@ -1,12 +1,12 @@
 extends ConfirmationDialog
 
-
 func _projectcreator() -> void:
 	popup_centered(G.TEST_POPUP_AREA)
 
 
 func _ready() -> void:
 	yield(get_tree(), "idle_frame")
+#	await get_tree().process_frame # version 4.0
 	popup_centered(G.TEST_POPUP_AREA)
 	_create_option_list()
 	
@@ -87,10 +87,10 @@ func _create_option_list() -> void:
 			)
 		i += 1
 
-onready var VALUE_X : = $"VBC/ManualSize/size_x/value" as SpinBox
-onready var VALUE_Y : = $"VBC/ManualSize/size_y/value" as SpinBox
-onready var PROJECT_PRESET_OPTIONS : = $"VBC/ProjectPresets/PresetOptions"
-onready var PROJECT_PRESET_MODE : = $"VBC/ProjectPresets/PresetMode"
+onready var VALUE_X : = $"VBC/ManualSize/size_x/value" #as SpinBox
+onready var VALUE_Y : = $"VBC/ManualSize/size_y/value" #as SpinBox
+onready var PROJECT_PRESET_OPTIONS : = $"VBC/ProjectPresets/PresetOptions" #as OptionButton
+onready var PROJECT_PRESET_MODE : = $"VBC/ProjectPresets/PresetMode" #as OptionButton
 
 func _on_PresetOptions_item_selected(index: int) -> void:
 	match PROJECT_PRESET_MODE.selected:
@@ -121,9 +121,10 @@ func _on_PresetMode_item_selected(_index: int) -> void:
 		_on_PresetOptions_item_selected(PROJECT_PRESET_OPTIONS.selected)
 		
 
-onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" as Node2D
+onready var SCREEN := $"../../System/ViewContainer/Viewport/Screen" #as Node2D
 onready var RESOLUTION := $"../Bar/ResTag" as Label
 onready var VIEW := $"../../System/ViewContainer/Viewport/view" as Camera2D
+onready var BG := $"../../System/ViewContainer/Viewport/Bg" as ColorRect
 
 func _on_ProjectCreator_confirmed() -> void:
 	print("ProjectCreator at flaut here.")
@@ -136,8 +137,13 @@ func _on_ProjectCreator_confirmed() -> void:
 	G.stored_img_y = SCREEN.img_storage.get_size().y
 	SCREEN.update_screen_rect()
 	RESOLUTION.update_info()
-
+	BG.update_rect()
 	VIEW.reset_zoom()
 
 
-
+func _on_OptionButton_item_selected(index: int) -> void:
+	match index:
+		0:
+			G.text_file_type = ".txt"
+		1:
+			G.text_file_type = ".md"

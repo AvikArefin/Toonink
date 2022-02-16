@@ -2,13 +2,10 @@ extends Node
 
 const TEST_POPUP_AREA := Vector2(500, 300)
 
-const window_size_x : int = 1322
-const window_size_y : int = 753
-
 var zoom_able : bool = true
 
-var stored_img_x : int
-var stored_img_y : int
+var stored_img_x : int = 1322
+var stored_img_y : int = 753
 
 #---------------------layers-------------------------
 var selected_layer : int # It seems there is some issue with it [the focus] goes away when you enable themeing.
@@ -22,8 +19,8 @@ var bg_color := Color.black
 var opacity : int = 100 # TODO
 
 #-------------- brushes and brush rects ---------------------
-var brush_list = []
-var brush_no : int
+onready var brush_list = []
+onready var brush_no : int
 
 var brush := Image.new()
 var eraser := Image.new()
@@ -67,9 +64,9 @@ var MODES := {
 }
 
 func change_mode(index: int) -> void:
-	G.mode_no = index
+	mode_no = index
 	current_mode = MODES[index]
-	G.reinitialize()
+	reinitialize()
 
 #----------------Initailizer---------------------------------------
 func reinitialize() -> void:
@@ -98,3 +95,5 @@ func reinitialize() -> void:
 	var w : float = brush.get_width() / 2.0
 	var h : float = brush.get_height() / 2.0
 	brush_dis = Vector2(w , h)
+#---------------------------------- Text file type ----------------------------
+var text_file_type : String = '.txt'

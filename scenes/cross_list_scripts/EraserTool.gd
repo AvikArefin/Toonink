@@ -1,5 +1,8 @@
 extends TextureButton
 
+onready var SCREEN:= $"../../../System/ViewContainer/Viewport/Screen"
+onready var TEXTPORT := $"../../../System/ViewContainer/Viewport/TextPort"
+
 func _on_Eraser_pressed() -> void:
 	print("profile: Eraser")
 	G.size  = 16
@@ -10,4 +13,7 @@ func _on_Eraser_pressed() -> void:
 	G.reinitialize()
 
 
-
+	SCREEN.is_allowed = true
+	
+	G.zoom_able = true
+	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_IGNORE

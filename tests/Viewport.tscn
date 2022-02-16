@@ -1,0 +1,65 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/Bg.gd" type="Script" id=1]
+[ext_resource path="res://assets/shaders/Dots.gdshader" type="Shader" id=2]
+[ext_resource path="res://scenes/Screen.gd" type="Script" id=3]
+[ext_resource path="res://scenes/TextPort.gd" type="Script" id=4]
+[ext_resource path="res://scenes/view.gd" type="Script" id=5]
+[ext_resource path="res://assets/library/stickers/1441A0E1-C89F-42FC-8EE0-5476F19F907E.png" type="Texture" id=6]
+[ext_resource path="res://assets/themes/bg_transparent.tres" type="StyleBox" id=7]
+
+[sub_resource type="ShaderMaterial" id=2]
+shader = ExtResource( 2 )
+shader_param/number = Vector2( 10, 10 )
+shader_param/progress = 0.42
+shader_param/diamondPixelSize = 10.0
+shader_param/color_rgb = Vector3( 0, 0, 0 )
+shader_param/color_alpha = 0.0
+
+[node name="Viewport" type="Control"]
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Bg" type="ColorRect" parent="." groups=["NOT_LAYER"]]
+material = SubResource( 2 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+size_flags_horizontal = 3
+script = ExtResource( 1 )
+
+[node name="TextPort" type="TextEdit" parent="." groups=["NOT_LAYER"]]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_right = 12.0
+margin_bottom = 8.0
+custom_colors/font_color = Color( 0, 0, 0, 1 )
+custom_styles/read_only = ExtResource( 7 )
+custom_styles/focus = ExtResource( 7 )
+custom_styles/normal = ExtResource( 7 )
+custom_styles/completion = ExtResource( 7 )
+script = ExtResource( 4 )
+
+[node name="Screen" type="TextureRect" parent="."]
+script = ExtResource( 3 )
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+margin_left = 777.0
+margin_right = 1227.0
+margin_bottom = 628.0
+rect_scale = Vector2( 0.5, 0.5 )
+texture = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="view" type="Camera2D" parent="." groups=["NOT_LAYER"]]
+offset = Vector2( 576, 335 )
+current = true
+editor_draw_limits = true
+editor_draw_drag_margin = true
+script = ExtResource( 5 )

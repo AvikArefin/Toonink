@@ -1,11 +1,11 @@
-[gd_scene load_steps=26 format=2]
+[gd_scene load_steps=28 format=2]
 
 [ext_resource path="res://assets/themes/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ProjectCreator.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/Layers.gd" type="Script" id=3]
 [ext_resource path="res://scenes/PaintBrush.gd" type="Script" id=4]
 [ext_resource path="res://scenes/cross_list_scripts/Plus.gd" type="Script" id=5]
-[ext_resource path="res://assets/shaders/Texture.gdshader" type="Shader" id=6]
+[ext_resource path="res://assets/shaders/Dots.gdshader" type="Shader" id=6]
 [ext_resource path="res://scenes/Popup.gd" type="Script" id=7]
 [ext_resource path="res://scenes/Mode.gd" type="Script" id=8]
 [ext_resource path="res://scenes/Screen.gd" type="Script" id=9]
@@ -13,62 +13,27 @@
 [ext_resource path="res://scenes/Position.gd" type="Script" id=11]
 [ext_resource path="res://scenes/TextPort.gd" type="Script" id=12]
 [ext_resource path="res://scenes/ProjectLoader.gd" type="Script" id=13]
+[ext_resource path="res://scenes/Bg.gd" type="Script" id=14]
 [ext_resource path="res://scenes/cross_list_scripts/Text.gd" type="Script" id=15]
 [ext_resource path="res://scenes/view.gd" type="Script" id=16]
-[ext_resource path="res://assets/icons/eraser-tool32.png" type="Texture" id=17]
-[ext_resource path="res://assets/icons/text32.png" type="Texture" id=18]
-[ext_resource path="res://assets/icons/add32.png" type="Texture" id=19]
+[ext_resource path="res://assets/icons/32px/text32.png" type="Texture" id=17]
+[ext_resource path="res://assets/icons/32px/add32.png" type="Texture" id=18]
+[ext_resource path="res://assets/icons/32px/paste32.png" type="Texture" id=19]
 [ext_resource path="res://assets/themes/bg_transparent.tres" type="StyleBox" id=20]
 [ext_resource path="res://scenes/size.gd" type="Script" id=21]
-[ext_resource path="res://assets/icons/paintbrush32.png" type="Texture" id=22]
+[ext_resource path="res://assets/icons/32px/eraser-tool32.png" type="Texture" id=22]
 [ext_resource path="res://scenes/cross_list_scripts/EraserTool.gd" type="Script" id=23]
-[ext_resource path="res://scenes/TextureLoader2.gd" type="Script" id=24]
+[ext_resource path="res://scenes/TextureLoader.gd" type="Script" id=24]
+[ext_resource path="res://scenes/Paste.gd" type="Script" id=25]
+[ext_resource path="res://assets/icons/32px/paintbrush32.png" type="Texture" id=26]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 6 )
-
-[sub_resource type="GDScript" id=3]
-script/source = "extends ColorRect
-
-#onready var VIEW : Viewport = $\"..\"
-
-func _ready() -> void:
-#	update_rect() # DELETE
-	_selected_shader(6)
-
-#func update_rect() -> void:
-#	rect_size = VIEW.get_size()
-
-const shader0 := preload(\"res://assets/shaders/Checker.gdshader\")
-const shader1 := preload(\"res://assets/shaders/Dots.gdshader\")
-const shader2 := preload(\"res://assets/shaders/Lines.gdshader\")
-const shader3 := preload(\"res://assets/shaders/Solid.gdshader\")
-const shader4 := preload(\"res://assets/shaders/Texture.gdshader\")
-const shader5 := preload(\"res://assets/shaders/Transparent.gdshader\")
-
-func _selected_shader(index: int) -> void:
-	var _color_rgb := Vector3(G.bg_color.r, G.bg_color.g, G.bg_color.b)
-	match index:
-		0:
-			self.material.shader = shader0
-			self.material.set_shader_param(\"line_color\", G.bg_color)
-		1:
-			self.material.shader = shader1
-			self.material.set_shader_param(\"color_rgb\", _color_rgb)
-		2:
-			self.material.shader = shader2
-			self.material.set_shader_param(\"line_color\", G.bg_color)
-		3:
-			self.material.shader = shader3
-			self.material.set_shader_param(\"_color\", G.bg_color)
-		4:
-			self.material.shader = shader4
-		5:
-			self.material.shader = shader5
-		6:
-			self.material.shader = null
-	
-"
+shader_param/number = Vector2( 10, 10 )
+shader_param/progress = 0.42
+shader_param/diamondPixelSize = 10.0
+shader_param/color_rgb = Vector3( 0, 0, 0 )
+shader_param/color_alpha = 0.0
 
 [node name="Main" type="Node"]
 
@@ -85,7 +50,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 margin_left = 128.0
 margin_top = 40.0
-margin_right = -35.0
+margin_right = -26.0
 margin_bottom = -41.0
 mouse_default_cursor_shape = 3
 theme = ExtResource( 1 )
@@ -105,10 +70,8 @@ material = SubResource( 2 )
 anchor_right = 1.0
 anchor_bottom = 1.0
 mouse_filter = 2
-script = SubResource( 3 )
-__meta__ = {
-"_edit_use_anchors_": false
-}
+size_flags_horizontal = 3
+script = ExtResource( 14 )
 
 [node name="TextPort" type="TextEdit" parent="System/ViewContainer/Viewport" groups=["NOT_LAYER"]]
 anchor_right = 1.0
@@ -122,7 +85,7 @@ custom_styles/normal = ExtResource( 20 )
 custom_styles/completion = ExtResource( 20 )
 script = ExtResource( 12 )
 
-[node name="Screen" type="Node2D" parent="System/ViewContainer/Viewport"]
+[node name="Screen" type="TextureRect" parent="System/ViewContainer/Viewport"]
 script = ExtResource( 9 )
 __meta__ = {
 "_editor_description_": ""
@@ -136,6 +99,7 @@ editor_draw_drag_margin = true
 script = ExtResource( 16 )
 
 [node name="UI" type="CanvasLayer" parent="."]
+pause_mode = 2
 
 [node name="Bar" type="Panel" parent="UI"]
 anchor_right = 1.0
@@ -198,12 +162,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="ColorDroper" type="ColorPickerButton" parent="UI/Bar"]
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 383.0
-margin_top = -24.0
-margin_right = 407.0
+[node name="FgColor" type="ColorPickerButton" parent="UI/Bar"]
+margin_left = 264.0
+margin_right = 288.0
+margin_bottom = 24.0
 toggle_mode = false
 flat = true
 __meta__ = {
@@ -211,13 +173,9 @@ __meta__ = {
 }
 
 [node name="Mode" type="OptionButton" parent="UI/Bar"]
-anchor_left = -0.00680787
-anchor_top = 1.0
-anchor_bottom = 1.0
-margin_left = 209.0
-margin_top = -24.0
-margin_right = 267.0
-margin_bottom = -1.0
+margin_left = 200.0
+margin_right = 264.0
+margin_bottom = 23.0
 hint_tooltip = "Cross mode"
 text = "Blend"
 align = 1
@@ -225,12 +183,12 @@ items = [ "Blend", null, false, 0, null, "Eraser", null, false, 1, null, "Pen", 
 selected = 0
 script = ExtResource( 8 )
 __meta__ = {
-"_edit_use_anchors_": true
+"_edit_use_anchors_": false
 }
 
 [node name="SizeTag" type="Label" parent="UI/Bar"]
-margin_left = 272.0
-margin_right = 305.0
+margin_left = 296.0
+margin_right = 336.0
 margin_bottom = 23.0
 text = "Size:"
 align = 2
@@ -239,8 +197,8 @@ __meta__ = {
 }
 
 [node name="size" type="SpinBox" parent="UI/Bar"]
-margin_left = 304.0
-margin_right = 368.0
+margin_left = 336.0
+margin_right = 400.0
 margin_bottom = 23.0
 min_value = 1.0
 max_value = 64.0
@@ -252,8 +210,8 @@ __meta__ = {
 }
 
 [node name="ShaderButton" type="OptionButton" parent="UI/Bar"]
-margin_left = 415.0
-margin_right = 503.0
+margin_left = 416.0
+margin_right = 504.0
 margin_bottom = 23.0
 hint_tooltip = "Background"
 text = "None"
@@ -263,12 +221,10 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="BgColorDroper" type="ColorPickerButton" parent="UI/Bar"]
-anchor_top = 1.0
-anchor_bottom = 1.0
+[node name="BgColor" type="ColorPickerButton" parent="UI/Bar"]
 margin_left = 504.0
-margin_top = -24.0
-margin_right = 534.0
+margin_right = 528.0
+margin_bottom = 24.0
 flat = true
 __meta__ = {
 "_edit_use_anchors_": false,
@@ -279,22 +235,20 @@ $Screen ---- node"
 }
 
 [node name="ZoomTag" type="Label" parent="UI/Bar"]
-margin_left = 549.0
+margin_left = 544.0
 margin_right = 592.0
-margin_bottom = 23.0
+margin_bottom = 24.0
 text = "Zoom:"
 align = 2
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Zoom_lv" type="SpinBox" parent="UI/Bar"]
-anchor_left = 1.0
-anchor_right = 1.0
-margin_left = -730.0
-margin_right = -666.0
+[node name="Zoom" type="SpinBox" parent="UI/Bar"]
+margin_left = 592.0
+margin_right = 656.0
 margin_bottom = 23.0
-min_value = 26.0
+min_value = 13.0
 max_value = 1919.0
 value = 100.0
 
@@ -324,19 +278,74 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="AboutDialogue" type="AcceptDialog" parent="UI"]
-margin_left = 8.0
-margin_top = 40.0
-margin_right = 312.0
-margin_bottom = 336.0
+[node name="AboutDialogue" type="WindowDialog" parent="UI"]
+margin_left = 184.0
+margin_top = 100.0
+margin_right = 584.0
+margin_bottom = 408.0
 theme = ExtResource( 1 )
 popup_exclusive = true
-window_title = "Toonink - v. debug build"
-dialog_text = "Author: Avik Arefin [Crimson_leaf]
-License: MIT [i.e. the README file]
-An aplication made in godot as a proof of concept.
-"
+window_title = "ABOUT"
+resizable = true
 script = ExtResource( 7 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TextBox" type="RichTextLabel" parent="UI/AboutDialogue"]
+anchor_right = 1.0
+margin_left = 8.0
+margin_right = -8.0
+margin_bottom = 188.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Container" type="VBoxContainer" parent="UI/AboutDialogue"]
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 8.0
+margin_top = -112.0
+margin_right = -8.0
+margin_bottom = -8.0
+size_flags_horizontal = 3
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Info" type="Button" parent="UI/AboutDialogue/Container"]
+margin_right = 384.0
+margin_bottom = 23.0
+text = "INFO"
+
+[node name="License" type="Button" parent="UI/AboutDialogue/Container"]
+margin_top = 27.0
+margin_right = 384.0
+margin_bottom = 50.0
+text = "LICENSE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SourceCode" type="Button" parent="UI/AboutDialogue/Container"]
+margin_top = 54.0
+margin_right = 384.0
+margin_bottom = 77.0
+text = "GET SOURCE CODE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Download" type="Button" parent="UI/AboutDialogue/Container"]
+margin_top = 81.0
+margin_right = 384.0
+margin_bottom = 104.0
+text = "DOWNLOAD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="ProjectLoader" type="FileDialog" parent="UI"]
 margin_right = 315.0
@@ -353,7 +362,6 @@ current_path = "/Projects/Godot/Toonink/"
 script = ExtResource( 13 )
 
 [node name="ProjectCreator" parent="UI" instance=ExtResource( 2 )]
-visible = false
 theme = ExtResource( 1 )
 
 [node name="TextureLoader" type="VBoxContainer" parent="UI"]
@@ -438,63 +446,70 @@ __meta__ = {
 "_edit_use_anchors_": false
 }
 
-[node name="Plus" type="TextureButton" parent="UI/CrossList"]
-margin_top = 282.0
+[node name="Paste" type="TextureButton" parent="UI/CrossList"]
+margin_top = 264.0
 margin_right = 32.0
-margin_bottom = 314.0
-hint_tooltip = "Add Profile"
+margin_bottom = 296.0
 texture_normal = ExtResource( 19 )
-stretch_mode = 3
-script = ExtResource( 5 )
+script = ExtResource( 25 )
 
 [node name="EraserTool" type="TextureButton" parent="UI/CrossList"]
-margin_top = 318.0
+margin_top = 300.0
 margin_right = 32.0
-margin_bottom = 350.0
+margin_bottom = 332.0
 hint_tooltip = "Eraser"
-texture_normal = ExtResource( 17 )
+texture_normal = ExtResource( 22 )
 script = ExtResource( 23 )
 
 [node name="Text" type="TextureButton" parent="UI/CrossList"]
-margin_top = 354.0
+margin_top = 336.0
 margin_right = 32.0
-margin_bottom = 386.0
+margin_bottom = 368.0
 size_flags_stretch_ratio = 0.25
-texture_normal = ExtResource( 18 )
+texture_normal = ExtResource( 17 )
 script = ExtResource( 15 )
 
 [node name="PaintBrush" type="TextureButton" parent="UI/CrossList"]
-margin_top = 390.0
+margin_top = 372.0
 margin_right = 32.0
-margin_bottom = 422.0
-texture_normal = ExtResource( 22 )
+margin_bottom = 404.0
+texture_normal = ExtResource( 26 )
 script = ExtResource( 4 )
+
+[node name="Plus" type="TextureButton" parent="UI/CrossList"]
+margin_top = 408.0
+margin_right = 32.0
+margin_bottom = 440.0
+hint_tooltip = "Add Profile"
+texture_normal = ExtResource( 18 )
+stretch_mode = 3
+script = ExtResource( 5 )
 
 [connection signal="pressed" from="UI/Bar/About" to="UI/AboutDialogue" method="_on_About_pressed"]
 [connection signal="pressed" from="UI/Bar/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Bar/New" to="UI/ProjectCreator" method="_projectcreator"]
 [connection signal="pressed" from="UI/Bar/Save" to="UI/ProjectLoader" method="_projectloader" binds= [ 1 ]]
 [connection signal="pressed" from="UI/Bar/Clear" to="System/ViewContainer/Viewport/Screen" method="create_new_image"]
-[connection signal="color_changed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="change_color"]
-[connection signal="popup_closed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 1 ]]
-[connection signal="pressed" from="UI/Bar/ColorDroper" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 1 ]]
+[connection signal="color_changed" from="UI/Bar/FgColor" to="System/ViewContainer/Viewport/Screen" method="_on_FgColor_color_changed"]
 [connection signal="item_selected" from="UI/Bar/Mode" to="System/ViewContainer/Viewport/Screen" method="_on_Mode_item_selected" binds= [ 2 ]]
 [connection signal="item_selected" from="UI/Bar/Mode" to="UI/Bar/Mode" method="_on_Mode_item_selected"]
 [connection signal="pressed" from="UI/Bar/Mode" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 2 ]]
 [connection signal="value_changed" from="UI/Bar/size" to="UI/Bar/size" method="_on_size_value_changed"]
-[connection signal="item_selected" from="UI/Bar/ShaderButton" to="System/ViewContainer/Viewport/Bg" method="_selected_shader"]
+[connection signal="item_selected" from="UI/Bar/ShaderButton" to="System/ViewContainer/Viewport/Bg" method="_change_shader"]
 [connection signal="item_selected" from="UI/Bar/ShaderButton" to="System/ViewContainer/Viewport/Screen" method="_on_ShaderButton_item_selected" binds= [ 4 ]]
 [connection signal="pressed" from="UI/Bar/ShaderButton" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 4 ]]
-[connection signal="color_changed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="_on_BgColorDroper_color_changed"]
-[connection signal="popup_closed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 5 ]]
-[connection signal="pressed" from="UI/Bar/BgColorDroper" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 5 ]]
-[connection signal="value_changed" from="UI/Bar/Zoom_lv" to="System/ViewContainer/Viewport/view" method="_on_Zoom_lv_value_changed"]
+[connection signal="color_changed" from="UI/Bar/BgColor" to="System/ViewContainer/Viewport/Screen" method="_on_BgColor_color_changed"]
+[connection signal="popup_closed" from="UI/Bar/BgColor" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 5 ]]
+[connection signal="pressed" from="UI/Bar/BgColor" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 5 ]]
 [connection signal="about_to_show" from="UI/AboutDialogue" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 0 ]]
 [connection signal="popup_hide" from="UI/AboutDialogue" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 0 ]]
+[connection signal="pressed" from="UI/AboutDialogue/Container/Info" to="UI/AboutDialogue" method="_on_Info_pressed"]
+[connection signal="pressed" from="UI/AboutDialogue/Container/License" to="UI/AboutDialogue" method="_on_License_pressed"]
+[connection signal="pressed" from="UI/AboutDialogue/Container/SourceCode" to="UI/AboutDialogue" method="_on_SourceCode_pressed"]
+[connection signal="pressed" from="UI/AboutDialogue/Container/Download" to="UI/AboutDialogue" method="_on_Download_pressed"]
 [connection signal="about_to_show" from="UI/ProjectLoader" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 3 ]]
 [connection signal="confirmed" from="UI/ProjectLoader" to="UI/ProjectLoader" method="save_confirmed"]
 [connection signal="file_selected" from="UI/ProjectLoader" to="UI/ProjectLoader" method="_on_ProjectLoader_file_selected"]
-[connection signal="hide" from="UI/ProjectLoader" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 3 ]]
 [connection signal="popup_hide" from="UI/ProjectLoader" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 3 ]]
 [connection signal="about_to_show" from="UI/ProjectCreator" to="System/ViewContainer/Viewport/Screen" method="configure_mode" binds= [ 7 ]]
 [connection signal="popup_hide" from="UI/ProjectCreator" to="System/ViewContainer/Viewport/Screen" method="create_mode" binds= [ 7 ]]
@@ -502,7 +517,8 @@ script = ExtResource( 4 )
 [connection signal="pressed" from="UI/Layers/Add" to="UI/Layers" method="_on_Add_pressed"]
 [connection signal="pressed" from="UI/Layers/Remove" to="UI/Layers" method="_on_Remove_pressed"]
 [connection signal="text_entered" from="UI/Layers/LineEdit" to="UI/Layers" method="_on_LineEdit_text_entered"]
-[connection signal="pressed" from="UI/CrossList/Plus" to="UI/CrossList/Plus" method="_on_Plus_pressed"]
+[connection signal="pressed" from="UI/CrossList/Paste" to="UI/CrossList/Paste" method="_on_Paste_pressed"]
 [connection signal="pressed" from="UI/CrossList/EraserTool" to="UI/CrossList/EraserTool" method="_on_Eraser_pressed"]
 [connection signal="pressed" from="UI/CrossList/Text" to="UI/CrossList/Text" method="_on_Text_pressed"]
 [connection signal="pressed" from="UI/CrossList/PaintBrush" to="UI/CrossList/PaintBrush" method="_on_PaintBrush_pressed"]
+[connection signal="pressed" from="UI/CrossList/Plus" to="UI/CrossList/Plus" method="_on_Plus_pressed"]

@@ -1,6 +1,6 @@
 extends OptionButton
 
-onready var SCREEN : Node2D = $"../../../System/ViewContainer/Viewport/Screen"
+onready var SCREEN := $"../../../System/ViewContainer/Viewport/Screen"
 # ^^^ 4.0 deprecated as the need to lock is no more.
 
 func _on_Mode_item_selected(index: int) -> void:
