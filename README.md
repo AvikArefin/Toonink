@@ -1,5 +1,5 @@
 # Toonink
- Warning: this is not production ready. Use at your own risk. Most of the functions may not be working or might not be implemented.
+ Warning: Under development and not ready for production. Use at your own risk. Most of the functions may not be working or might not be implemented.
  
 
  ❇️ An app made in godot as a proof of concept.
@@ -8,9 +8,11 @@
 
  ❎ Rastarized or vector based [not svg]
 
+ ✅ Record audio
+
  ❎ Save project in formats that are universal [mostly].
 
- ❎ Save texts in .txt or .md format and Save drawing in .png format Save audio in .wav format [wha?] ???
+ ❎ Save texts in .txt or .md format, drawing in .png format and audio in .wav format.
 
  ❎ Create timelapse ???
 
