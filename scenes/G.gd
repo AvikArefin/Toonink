@@ -1,7 +1,5 @@
 extends Node
 
-const TEST_POPUP_AREA := Vector2(500, 300)
-
 var zoom_able : bool = true
 
 var stored_img_x : int = 1322
@@ -19,7 +17,7 @@ var bg_color := Color.black
 var opacity : int = 100 # TODO
 
 #-------------- brushes and brush rects ---------------------
-onready var brush_list = []
+onready var brush_list : Array = []
 onready var brush_no : int
 
 var brush := Image.new()
@@ -28,7 +26,7 @@ var blit_brush := Image.new()
 var brush_rect : Rect2 
 
 var brush_dis : Vector2
-#----------------change brush-------------------------------------------
+#-----------------------change brush------------------------------------
 
 func change_brush(index: int) -> void:
 	brush_no = index
@@ -36,7 +34,9 @@ func change_brush(index: int) -> void:
 	brush_rect = brush.get_used_rect() 
 
 	reinitialize()
-#-------------------mode changer-------------------------
+#----------------------------leaf---------------------------------------
+onready var leaf_list : Array = []
+#------------------------mode changer-----------------------------------
 var mode_no : int
 var current_mode : GDScript = xBlend_Brush
 
@@ -81,8 +81,8 @@ func reinitialize() -> void:
 
 #	Checkes if the size is okay.
 	if size != brush.get_size().x:
-#		print(size)
-#		print(brush.get_size())
+#		print_debug(size)
+#		print_debug(brush.get_size())
 		brush.copy_from(brush_list[brush_no])
 		brush.resize(size, size, Image.INTERPOLATE_NEAREST)
 		

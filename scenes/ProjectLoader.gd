@@ -13,7 +13,8 @@ func _projectloader(index : int) -> void:
 		1:
 			get_line_edit().visible = true
 			set_mode(FileDialog.MODE_SAVE_FILE) ####
-	popup_centered(G.TEST_POPUP_AREA)
+#	popup_centered(G.TEST_POPUP_AREA)
+	popup()
 
 
 func _on_ProjectLoader_file_selected(path: String) -> void:

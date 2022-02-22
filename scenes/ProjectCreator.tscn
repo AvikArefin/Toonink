@@ -5,8 +5,9 @@
 [ext_resource path="res://assets/icons/portrait.png" type="Texture" id=3]
 
 [node name="ProjectCreator" type="ConfirmationDialog"]
-margin_right = 400.0
-margin_bottom = 160.0
+visible = true
+anchor_right = 1.0
+anchor_bottom = 1.0
 size_flags_horizontal = 13
 size_flags_vertical = 13
 popup_exclusive = true
@@ -18,16 +19,14 @@ __meta__ = {
 }
 
 [node name="VBC" type="VBoxContainer" parent="."]
-margin_left = 8.0
-margin_top = 8.0
-margin_right = 392.0
-margin_bottom = 121.0
+anchor_right = 1.0
+anchor_bottom = 1.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="ProjectName" type="HBoxContainer" parent="VBC"]
-margin_right = 384.0
+margin_right = 1322.0
 margin_bottom = 23.0
 
 [node name="NameLabel" type="Label" parent="VBC/ProjectName"]
@@ -37,14 +36,14 @@ text = "Project Name:"
 
 [node name="NameInput" type="LineEdit" parent="VBC/ProjectName"]
 margin_left = 89.0
-margin_right = 384.0
+margin_right = 1322.0
 margin_bottom = 23.0
 size_flags_horizontal = 3
 placeholder_text = "Enter name... "
 
 [node name="TextType" type="HBoxContainer" parent="VBC"]
 margin_top = 27.0
-margin_right = 384.0
+margin_right = 1322.0
 margin_bottom = 50.0
 
 [node name="Label" type="Label" parent="VBC/TextType"]
@@ -62,7 +61,7 @@ selected = 0
 
 [node name="ProjectPresets" type="HBoxContainer" parent="VBC"]
 margin_top = 54.0
-margin_right = 384.0
+margin_right = 1322.0
 margin_bottom = 78.0
 
 [node name="Presets" type="Label" parent="VBC/ProjectPresets"]
@@ -72,13 +71,13 @@ text = "Image size presets:"
 
 [node name="PresetOptions" type="OptionButton" parent="VBC/ProjectPresets"]
 margin_left = 115.0
-margin_right = 273.0
+margin_right = 1211.0
 margin_bottom = 24.0
 size_flags_horizontal = 3
 
 [node name="PresetMode" type="OptionButton" parent="VBC/ProjectPresets"]
-margin_left = 277.0
-margin_right = 384.0
+margin_left = 1215.0
+margin_right = 1322.0
 margin_bottom = 24.0
 text = "Landscape"
 icon = ExtResource( 2 )
@@ -87,14 +86,14 @@ selected = 0
 
 [node name="ManualSize" type="HBoxContainer" parent="VBC"]
 margin_top = 82.0
-margin_right = 384.0
+margin_right = 1322.0
 margin_bottom = 105.0
 size_flags_horizontal = 3
 alignment = 1
 
 [node name="size_x" type="HBoxContainer" parent="VBC/ManualSize"]
-margin_left = 105.0
-margin_right = 190.0
+margin_left = 574.0
+margin_right = 659.0
 margin_bottom = 23.0
 
 [node name="label" type="Label" parent="VBC/ManualSize/size_x"]
@@ -112,8 +111,8 @@ max_value = 10000.0
 value = 1.0
 
 [node name="size_y" type="HBoxContainer" parent="VBC/ManualSize"]
-margin_left = 194.0
-margin_right = 279.0
+margin_left = 663.0
+margin_right = 748.0
 margin_bottom = 23.0
 
 [node name="label" type="Label" parent="VBC/ManualSize/size_y"]

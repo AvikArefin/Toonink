@@ -1,4 +1,3 @@
-#extends Node2D
 extends TextureRect
 
 onready var SCREEN_RECT : Rect2 = get_viewport_rect()
@@ -14,7 +13,6 @@ var final_pos : Vector2
 var img_storage : Image
 var img_texture : ImageTexture = ImageTexture.new()
 
-
 #------------------------------------------------------------------------------
 func _ready() -> void:
 	create_new_image()
@@ -25,7 +23,7 @@ func create_new_image() -> void:
 	img_storage = img
 	img_storage.lock() # 4.0 deprecated
 	update()
-#	update_screen_texture()
+	update_screen_texture()
 
 func clear_image() -> void:
 	img_texture = ImageTexture.new()
@@ -34,8 +32,8 @@ func clear_image() -> void:
 
 #---------------------------- INPUT-SYSTEM ------------------------------------
 func _input(event: InputEvent) -> void:
-	if SCREEN_RECT.has_point(get_global_mouse_position()) && is_allowed:
-#		print(screen_rect)
+	if SCREEN_RECT.has_point(get_global_mouse_position()):
+#		print_debug(screen_rect)
 		if event.is_action_pressed("primary"):
 			previous_pos = get_local_mouse_position().round()
 			G.current_mode.draw(img_storage, previous_pos)
@@ -46,7 +44,7 @@ func _input(event: InputEvent) -> void:
 		if event is InputEventMouseMotion:
 			if Input.is_action_pressed("primary"):
 				final_pos = get_local_mouse_position().round()
-#				print(final_pos)
+#				print_debug(final_pos)
 				fill_in_the_gap(previous_pos, final_pos)
 #				current_mode.draw(img_storage, previous_pos)
 				previous_pos = final_pos
@@ -77,6 +75,8 @@ func fill_in_the_gap(start : Vector2, end : Vector2) -> void:
 # Optimizations: The drawing gets slower when the drawing screen too large.
 # Enhancements: When drawing faster the lines becomes robotic.
 
+# Perhaps a lerp function will do better to make the lines smoother.
+
 #-------------------------------Final Renderer -------------------------------------
 func update_screen_texture() -> void:				#
 	img_texture.create_from_image(img_storage, 0)	# When the Screen is TextureRect
@@ -93,27 +93,20 @@ func _on_BgColor_color_changed(color: Color) -> void:
 #---------------------------- Control SYSTEM ----------------------------------
 
 onready var TEXTPORT : TextEdit = $"../TextPort" as TextEdit
+onready var VIEW : Camera2D = $"../view" as Camera2D
+
 
 var time_first := OS.get_unix_time()
 var time_second := OS.get_unix_time()
 var time_elapsed := OS.get_unix_time()
 
-func configure_mode(extra_arg_0: int) -> void:
+func configure_mode(arg : int) -> void:
 	get_tree().paused = true
 #	is_allowed = false
 #	G.zoom_able = false
 	
 #	TEXTPORT.mouse_filter = Control.MOUSE_FILTER_IGNORE
 #	TEXTPORT.pause_mode = Node.PAUSE_MODE_STOP	
-
-	time_first = OS.get_ticks_usec()
-	ifatch(extra_arg_0)
-	time_second = OS.get_ticks_usec()
-	time_elapsed = time_second - time_first
-	print_debug(time_elapsed)
-	
-
-func ifatch(arg : int) -> void:
 	if arg == 0:
 		print_debug('about popup about to show')
 	elif arg == 1:
@@ -137,34 +130,30 @@ func _on_ShaderButton_item_selected(_index: int, extra_arg_0: int) -> void:
 	create_mode(extra_arg_0)
 
 
-func create_mode(extra_arg_0: int) -> void:
+func create_mode(arg: int) -> void:
 	get_tree().paused = false
 #	is_allowed = true
 #	G.zoom_able = true
-
-
-#	print(extra_arg_0)
-	match extra_arg_0:
-#	fix of the unwanted drawing... 
-		0:
-			print('about popup hide')
-		1:
-			print("ColorDropper popup closed")
+	if arg == 0:
+			print_debug('about popup hide')
+	elif arg == 1:
+			print_debug("ColorDropper popup closed")
 #			means its time to update the blit brush color
 			G.blit_brush.fill(G.cross_color)
 			previous_pos = get_local_mouse_position()
-		2:
-			print("mode")
-		3:
-			print("projectloader popup about to hide")
-		4:
-			print("ShaderButton item selected")
-		5:
-			print("BgColorDropper popup closed")
+	elif arg == 2:
+			print_debug("mode")
+	elif arg == 3:
+			print_debug("projectloader popup about to hide")
+	elif arg == 4:
+			print_debug("ShaderButton item selected")
+	elif arg == 5:
+			print_debug("BgColorDropper popup closed")
+			#	fix of the unwanted drawing... 
 			previous_pos = get_local_mouse_position()
-		7:
-			print("Project Creator hide popup")
+	elif arg == 7:
+			print_debug("Project Creator hide popup")
 
-
+# TODO ONLY KEEP THE INPUT SYSTEM HERE...
 
 

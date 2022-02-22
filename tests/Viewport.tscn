@@ -5,7 +5,7 @@
 [ext_resource path="res://scenes/Screen.gd" type="Script" id=3]
 [ext_resource path="res://scenes/TextPort.gd" type="Script" id=4]
 [ext_resource path="res://scenes/view.gd" type="Script" id=5]
-[ext_resource path="res://assets/library/stickers/1441A0E1-C89F-42FC-8EE0-5476F19F907E.png" type="Texture" id=6]
+[ext_resource path="res://assets/library/leaves/1441A0E1-C89F-42FC-8EE0-5476F19F907E.png" type="Texture" id=6]
 [ext_resource path="res://assets/themes/bg_transparent.tres" type="StyleBox" id=7]
 
 [sub_resource type="ShaderMaterial" id=2]

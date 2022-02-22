@@ -39,7 +39,7 @@ func zoom_at_point(zoom_change, point) -> void:
 		ZOOM_SPIN_BOX.value = 100/zoom_x ################################
 
 func reset_zoom() -> void:
-#	print("reset_zoom")
+#	print_debug("reset_zoom")
 	zoom = Vector2.ONE
 	ZOOM_SPIN_BOX.value = 100 ###########################################
 	global_position = Vector2.ZERO

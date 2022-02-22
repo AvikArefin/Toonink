@@ -1,13 +1,15 @@
 extends ConfirmationDialog
 
 func _projectcreator() -> void:
-	popup_centered(G.TEST_POPUP_AREA)
+#	popup_centered(G.TEST_POPUP_AREA)
+	popup()
 
 
 func _ready() -> void:
 	yield(get_tree(), "idle_frame")
 #	await get_tree().process_frame # version 4.0
-	popup_centered(G.TEST_POPUP_AREA)
+#	popup_centered(G.TEST_POPUP_AREA) 
+	popup()
 	_create_option_list()
 	
 
@@ -127,7 +129,7 @@ onready var VIEW := $"../../System/ViewContainer/Viewport/view" as Camera2D
 onready var BG := $"../../System/ViewContainer/Viewport/Bg" as ColorRect
 
 func _on_ProjectCreator_confirmed() -> void:
-	print("ProjectCreator at flaut here.")
+	print_debug("ProjectCreator at flaut here.")
 	SCREEN.img_storage = Image.new()
 	SCREEN.img_storage.create(VALUE_X.value, VALUE_Y.value, false, Image.FORMAT_RGBA8)
 	SCREEN.img_storage.lock() # 4.0 deprecated

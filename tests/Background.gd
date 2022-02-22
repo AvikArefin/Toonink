@@ -45,7 +45,7 @@ func change_background(index: int) -> void:
 		7:
 			picture()
 			
-#	print(multi_dots)
+#	print_debug(multi_dots)
 	update()
 
 

@@ -1,5 +1,4 @@
 extends ColorRect
-#extends Control
 
 func _ready() -> void:
 	_change_shader(6)

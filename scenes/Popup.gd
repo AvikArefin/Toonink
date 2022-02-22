@@ -7,7 +7,8 @@ const about : String = "Name: Toonink\nVersion: DEV SNAPSHOT 13\nAuthor: Avik Ar
 onready var TEXTBOX := $TextBox
 
 func _on_About_pressed():
-	popup_centered(G.TEST_POPUP_AREA)
+#	popup_centered(G.TEST_POPUP_AREA)
+	popup()
 	_on_Info_pressed()
 
 func _on_Info_pressed() -> void:

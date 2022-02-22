@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://assets/themes/theme.tres" type="Theme" id=1]
 [ext_resource path="res://scenes/ProjectCreator.tscn" type="PackedScene" id=2]
@@ -26,6 +26,8 @@
 [ext_resource path="res://scenes/TextureLoader.gd" type="Script" id=24]
 [ext_resource path="res://scenes/Paste.gd" type="Script" id=25]
 [ext_resource path="res://assets/icons/32px/paintbrush32.png" type="Texture" id=26]
+[ext_resource path="res://scenes/LeafList.gd" type="Script" id=27]
+[ext_resource path="res://scenes/Sound.gd" type="Script" id=28]
 
 [sub_resource type="ShaderMaterial" id=2]
 shader = ExtResource( 6 )
@@ -34,6 +36,8 @@ shader_param/progress = 0.42
 shader_param/diamondPixelSize = 10.0
 shader_param/color_rgb = Vector3( 0, 0, 0 )
 shader_param/color_alpha = 0.0
+
+[sub_resource type="AudioStreamMicrophone" id=3]
 
 [node name="Main" type="Node"]
 
@@ -48,11 +52,10 @@ __meta__ = {
 [node name="ViewContainer" type="ViewportContainer" parent="System"]
 anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = 128.0
-margin_top = 40.0
-margin_right = -26.0
-margin_bottom = -41.0
-mouse_default_cursor_shape = 3
+margin_left = 120.0
+margin_top = 56.0
+margin_right = -34.0
+margin_bottom = -25.0
 theme = ExtResource( 1 )
 __meta__ = {
 "_edit_use_anchors_": false
@@ -106,6 +109,55 @@ anchor_right = 1.0
 margin_bottom = 24.0
 __meta__ = {
 "_edit_lock_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="Sound" type="Control" parent="UI/Bar"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -40.0
+margin_bottom = 40.0
+script = ExtResource( 28 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AudioStreamRecord" type="AudioStreamPlayer" parent="UI/Bar/Sound"]
+stream = SubResource( 3 )
+autoplay = true
+bus = "Record"
+
+[node name="Record" type="Button" parent="UI/Bar/Sound"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -434.0
+margin_right = -377.0
+margin_bottom = 23.0
+text = "RECORD"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Save" type="Button" parent="UI/Bar/Sound"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -370.0
+margin_right = -328.0
+margin_bottom = 24.0
+disabled = true
+text = "SAVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Status" type="Label" parent="UI/Bar/Sound"]
+anchor_left = 1.0
+anchor_right = 1.0
+margin_left = -530.0
+margin_top = 24.0
+margin_right = -442.0
+margin_bottom = 47.0
+__meta__ = {
 "_edit_use_anchors_": false
 }
 
@@ -255,7 +307,7 @@ value = 100.0
 [node name="ResTag" type="Label" parent="UI/Bar"]
 anchor_left = 1.0
 anchor_right = 1.0
-margin_left = -218.0
+margin_left = -202.0
 margin_right = -90.0
 margin_bottom = 24.0
 text = "- [ x ] - px"
@@ -275,28 +327,36 @@ size_flags_horizontal = 5
 align = 1
 script = ExtResource( 11 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="AboutDialogue" type="WindowDialog" parent="UI"]
-margin_left = 184.0
-margin_top = 100.0
-margin_right = 584.0
-margin_bottom = 408.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.0
+margin_top = -152.5
+margin_right = 235.0
+margin_bottom = 175.5
 theme = ExtResource( 1 )
 popup_exclusive = true
 window_title = "ABOUT"
-resizable = true
 script = ExtResource( 7 )
 __meta__ = {
+"_edit_lock_": true,
 "_edit_use_anchors_": false
 }
 
 [node name="TextBox" type="RichTextLabel" parent="UI/AboutDialogue"]
 anchor_right = 1.0
+anchor_bottom = 1.0
 margin_left = 8.0
 margin_right = -8.0
-margin_bottom = 188.0
+margin_bottom = -121.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -316,13 +376,13 @@ __meta__ = {
 }
 
 [node name="Info" type="Button" parent="UI/AboutDialogue/Container"]
-margin_right = 384.0
+margin_right = 464.0
 margin_bottom = 23.0
 text = "INFO"
 
 [node name="License" type="Button" parent="UI/AboutDialogue/Container"]
 margin_top = 27.0
-margin_right = 384.0
+margin_right = 464.0
 margin_bottom = 50.0
 text = "LICENSE"
 __meta__ = {
@@ -331,7 +391,7 @@ __meta__ = {
 
 [node name="SourceCode" type="Button" parent="UI/AboutDialogue/Container"]
 margin_top = 54.0
-margin_right = 384.0
+margin_right = 464.0
 margin_bottom = 77.0
 text = "GET SOURCE CODE"
 __meta__ = {
@@ -340,7 +400,7 @@ __meta__ = {
 
 [node name="Download" type="Button" parent="UI/AboutDialogue/Container"]
 margin_top = 81.0
-margin_right = 384.0
+margin_right = 464.0
 margin_bottom = 104.0
 text = "DOWNLOAD"
 __meta__ = {
@@ -348,8 +408,14 @@ __meta__ = {
 }
 
 [node name="ProjectLoader" type="FileDialog" parent="UI"]
-margin_right = 315.0
-margin_bottom = 130.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.0
+margin_top = -144.5
+margin_right = 235.0
+margin_bottom = 167.5
 focus_mode = 2
 theme = ExtResource( 1 )
 popup_exclusive = true
@@ -357,12 +423,25 @@ window_title = "Open a File"
 mode = 0
 access = 2
 filters = PoolStringArray( "*.png", "*.jpg" )
-current_dir = "/Projects/Godot/Toonink"
-current_path = "/Projects/Godot/Toonink/"
+current_dir = "/Projects/Godot Projects/Toonink"
+current_path = "/Projects/Godot Projects/Toonink/"
 script = ExtResource( 13 )
+__meta__ = {
+"_edit_lock_": true
+}
 
 [node name="ProjectCreator" parent="UI" instance=ExtResource( 2 )]
+visible = false
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -245.0
+margin_top = -72.5
+margin_right = 235.0
+margin_bottom = 87.5
 theme = ExtResource( 1 )
+resizable = false
 
 [node name="TextureLoader" type="VBoxContainer" parent="UI"]
 anchor_bottom = 1.0
@@ -422,6 +501,9 @@ margin_top = -32.0
 margin_right = -16.0
 margin_bottom = -8.0
 text = "X REMOVE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="LineEdit" type="LineEdit" parent="UI/Layers"]
 anchor_top = 1.0
@@ -450,6 +532,7 @@ __meta__ = {
 margin_top = 264.0
 margin_right = 32.0
 margin_bottom = 296.0
+toggle_mode = true
 texture_normal = ExtResource( 19 )
 script = ExtResource( 25 )
 
@@ -465,7 +548,6 @@ script = ExtResource( 23 )
 margin_top = 336.0
 margin_right = 32.0
 margin_bottom = 368.0
-size_flags_stretch_ratio = 0.25
 texture_normal = ExtResource( 17 )
 script = ExtResource( 15 )
 
@@ -485,6 +567,19 @@ texture_normal = ExtResource( 18 )
 stretch_mode = 3
 script = ExtResource( 5 )
 
+[node name="LeafList" type="VBoxContainer" parent="UI"]
+anchor_bottom = 1.0
+margin_left = 128.0
+margin_top = 24.0
+margin_right = 384.0
+margin_bottom = -25.0
+script = ExtResource( 27 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[connection signal="pressed" from="UI/Bar/Sound/Record" to="UI/Bar/Sound" method="_on_Record_pressed"]
+[connection signal="pressed" from="UI/Bar/Sound/Save" to="UI/Bar/Sound" method="_on_Save_pressed"]
 [connection signal="pressed" from="UI/Bar/About" to="UI/AboutDialogue" method="_on_About_pressed"]
 [connection signal="pressed" from="UI/Bar/Load" to="UI/ProjectLoader" method="_projectloader" binds= [ 0 ]]
 [connection signal="pressed" from="UI/Bar/New" to="UI/ProjectCreator" method="_projectcreator"]
