@@ -1,5 +1,5 @@
 # Toonink
- Warning: Under development and not ready for production. Use at your own risk. Most of the functions may not be working or might not be implemented.
+Warning: Does not work with godot 4. Newly implemented version will be produced in available time
  
 
  ❇️ An app made in godot as a proof of concept.
